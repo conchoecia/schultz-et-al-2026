@@ -25,6 +25,8 @@ source "$REPO_ROOT/config.yaml"
 
 module load Conda/Miniforge3 2>/dev/null || true
 source activate "$EGT_CONDA_ENV"
+# hmmscan is provided by the HMMER lmod module on LiSC; harmless no-op elsewhere.
+module load HMMER 2>/dev/null || true
 
 OUT="$SCRIPT_DIR/out"
 mkdir -p "$OUT/tbl"

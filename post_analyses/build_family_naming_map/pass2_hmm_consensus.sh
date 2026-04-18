@@ -29,6 +29,8 @@ source "$REPO_ROOT/config.yaml"
 
 module load Conda/Miniforge3 2>/dev/null || true
 source activate "$EGT_CONDA_ENV"
+# hmmemit/hmmstat + diamond come from LiSC lmod modules; harmless no-op elsewhere.
+module load HMMER DIAMOND 2>/dev/null || true
 
 OUT="$SCRIPT_DIR/out"
 mkdir -p "$OUT"
