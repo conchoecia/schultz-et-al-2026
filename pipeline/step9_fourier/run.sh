@@ -7,6 +7,10 @@
 #SBATCH --error=%x_%j.err
 set -euo pipefail
 
+# Single sbatch job: collapsed-tree (a), Fourier over 10 standard clades
+# (b), plus Fourier on the two published clade-subset variants (c, d) and
+# the Vertebrata-minus-Teleostei 250-550 Mya max-time sweep (e).
+
 # Under sbatch, BASH_SOURCE points at /var/spool/slurm/..., so we resolve
 # REPO_ROOT by walking up from SLURM_SUBMIT_DIR (or this dir for `bash run.sh`).
 STEP_NAME=step9_fourier

@@ -7,6 +7,10 @@
 #SBATCH --error=%x_%j.err
 set -euo pipefail
 
+# Single sbatch job: main branch-stats-vs-time plus the two published
+# clade-subset variants (Protostomia-minus-Clitellata, Vertebrata-minus-
+# Teleostei). Labeled (a)/(b)/(c) below.
+
 # Under sbatch, BASH_SOURCE points at /var/spool/slurm/..., so we resolve
 # REPO_ROOT by walking up from SLURM_SUBMIT_DIR (or this dir for `bash run.sh`).
 STEP_NAME=step7_tree_analysis_branchstatsvtime
