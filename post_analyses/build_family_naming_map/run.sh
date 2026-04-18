@@ -24,11 +24,19 @@ if [ -z "$HUMAN_RBH" ]; then
     exit 1
 fi
 
-# Pass 1: direct RBH join. Fast.
+# Pass 1: direct RBH join. Fast. If pass2_hmm_consensus.sh has already
+# produced pass2_hmm_to_human.tsv, fold it in via --hmm-map for the final
+# combined map. Otherwise write the RBH-only map and the user can optionally
+# run pass2_hmm_consensus.sh, then re-run this script.
+HMM_MAP_ARGS=()
+PASS2_TSV="$OUT/pass2_hmm_to_human.tsv"
+if [ -s "$PASS2_TSV" ]; then
+    echo "Folding pass-2 HMM hits from $PASS2_TSV into the final map."
+    HMM_MAP_ARGS=(--hmm-map "$PASS2_TSV")
+fi
+
 egt build-family-naming-map \
     --alg-rbh     "$ALG_RBH" \
     --human-rbh   "$HUMAN_RBH" \
-    --output      "$OUT/bcns_family_to_human_gene.tsv"
-
-# To run the optional pass 2 (HMM-consensus DIAMOND for families with no
-# direct human hit), see pass2_hmm_consensus.sh in this directory.
+    --output      "$OUT/bcns_family_to_human_gene.tsv" \
+    "${HMM_MAP_ARGS[@]}"
