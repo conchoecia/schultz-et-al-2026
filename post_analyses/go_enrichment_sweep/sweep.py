@@ -326,8 +326,15 @@ def sweep_clade(clade_rows, fam_to_genes, background_to_terms, term_namespace):
 def harvest_significant_terms(clade, clade_rows, records,
                                fam_to_genes, background_to_terms,
                                term_namespace):
-    """For configs that produced q<=0.25 hits, re-run enrichment at the
-    smallest such N to collect the per-term rows for the sig-terms TSV.
+    """Harvest every GO term reaching q <= 0.25 at every (axis, N) cell.
+
+    An earlier version only recorded the smallest N per (clade, axis),
+    which collapsed every significant-term row to one N value per clade
+    and made downstream plots (especially the volcano, which labels dots
+    with N) uninformative. Now: for each (axis, N) cell whose sweep
+    record showed q25 hits under any namespace, re-run the enrichment
+    and emit all q<=0.25 terms at that cell. Yields many more rows but
+    the correct distribution over N.
     """
     out = []
     df = clade_rows.copy()
@@ -341,38 +348,37 @@ def harvest_significant_terms(clade, clade_rows, records,
     closeness_order = df.sort_values("mean_in_out_ratio_log_sigma").index.to_numpy()
 
     for axis in ("stability", "closeness", "intersection"):
-        cand = [r for r in records
-                if r["axis"] == axis and r["namespace"] == "all"
-                and r["n_hits_q25"] > 0]
-        if not cand:
-            continue
-        cand.sort(key=lambda r: r["N_threshold"])
-        r = cand[0]
-        N = r["N_threshold"]
-        if axis == "stability":
-            idxs = stability_order[:N]
-        elif axis == "closeness":
-            idxs = closeness_order[:N]
-        else:
-            idxs = list(set(stability_order[:N].tolist())
-                        & set(closeness_order[:N].tolist()))
-        s2 = df.loc[list(idxs)]
-        families = pd.concat([s2["ortholog1"], s2["ortholog2"]]).dropna().unique()
-        fg = set()
-        for f in families:
-            fg |= fam_to_genes.get(f, set())
-        ns_res = enrich_for_foreground(fg, background_to_terms, term_namespace)
-        for ns, rows in ns_res.items():
-            for rr in rows:
-                if rr["q"] > 0.25:
-                    continue
-                out.append(dict(
-                    clade=clade, axis=axis, N_threshold=N,
-                    sweep_namespace=ns,
-                    go_id=rr["go_id"], go_namespace=rr["term_namespace"],
-                    k=rr["k"], K=rr["K"], n=rr["n"], N=rr["N"],
-                    fold=rr["fold"], p=rr["p"], q=rr["q"],
-                ))
+        # Every N_threshold whose "all" sweep cell produced q25 hits.
+        cells = sorted({r["N_threshold"] for r in records
+                        if r["axis"] == axis and r["namespace"] == "all"
+                        and r["n_hits_q25"] > 0})
+        for N in cells:
+            if axis == "stability":
+                idxs = stability_order[:N]
+            elif axis == "closeness":
+                idxs = closeness_order[:N]
+            else:
+                idxs = list(set(stability_order[:N].tolist())
+                            & set(closeness_order[:N].tolist()))
+            if len(idxs) == 0:
+                continue
+            s2 = df.loc[list(idxs)]
+            families = pd.concat([s2["ortholog1"], s2["ortholog2"]]).dropna().unique()
+            fg = set()
+            for f in families:
+                fg |= fam_to_genes.get(f, set())
+            ns_res = enrich_for_foreground(fg, background_to_terms, term_namespace)
+            for ns, rows in ns_res.items():
+                for rr in rows:
+                    if rr["q"] > 0.25:
+                        continue
+                    out.append(dict(
+                        clade=clade, axis=axis, N_threshold=N,
+                        sweep_namespace=ns,
+                        go_id=rr["go_id"], go_namespace=rr["term_namespace"],
+                        k=rr["k"], K=rr["K"], n=rr["n"], N=rr["N"],
+                        fold=rr["fold"], p=rr["p"], q=rr["q"],
+                    ))
     return out
 
 
