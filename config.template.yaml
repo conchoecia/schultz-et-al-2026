@@ -1,0 +1,45 @@
+# schultz-et-al-2026 — pipeline configuration
+#
+# Copy this file to config.yaml and edit the values to match your
+# environment. The defaults are the exact values used in the analyses on
+# the LiSC cluster.
+#
+# NOTE: this file is sourced as bash-style KEY=VALUE assignments by
+# pipeline/run_all.sh and by each pipeline/step*/run.sh. Keep it
+# bash-parseable: no spaces around `=`, no multi-line values. (The `.yaml`
+# extension is a convention only.)
+
+# --- Conda env with egt installed ---
+EGT_CONDA_ENV=/lisc/data/scratch/molevo/dts/conda_envs/egt
+
+# --- Reference data (LiSC defaults; override for your env) ---
+ALG_NAME=BCnSSimakov2022
+ALG_RBH=/lisc/data/scratch/molevo/dts/odp/LG_db/BCnSSimakov2022/BCnSSimakov2022.rbh
+RBH_DIR=/lisc/data/scratch/molevo/dts/manifold/BCnSSimakov2022_current_rbh_202509/
+GENOME_CONFIG_YAML=/lisc/data/scratch/molevo/dts/manifold/decay_odp_run/config.yaml
+CHROM_COUNTS=/lisc/data/scratch/molevo/dts/manifold/decay_odp_run/species_chrom_counts.tsv
+SYNTENY_DIR=/lisc/data/scratch/molevo/dts/manifold/decay_odp_run/odp/step2-figures/synteny_nocolor/
+
+# --- User-supplied inputs for step 2 (you must provide these) ---
+# TimeTree export (Newick) — download from timetree.org for the species set
+TIME_NEWICK=pipeline/step2_divergence_times/newick_timetree.nwk
+
+# --- User-supplied inputs for step 7 (you must provide this) ---
+# Extinction-intensity TSV (e.g. from a Sepkoski-derived dataset)
+EXTINCTION_INTENSITY=pipeline/step7_tree_analysis_branchstatsvtime/extinction_intensity.tsv
+
+# --- Tree naming ---
+TREE_PREFIX=BCnS_2026
+
+# --- Step 3 tunables ---
+TARGET_SPECIES=Branchiostomafloridae-7739-GCF000003815.2
+MIN_SCAF_SIZE=250000
+BIN_SIZE=50
+
+# --- Step 6 tunables ---
+NUM_SIMULATIONS=1000
+
+# --- Concurrency / SLURM ---
+CORES_STEP4=31
+CORES_STEP6=25
+CORES_STEP7=4

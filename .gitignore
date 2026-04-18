@@ -1,0 +1,46 @@
+# user config
+config.yaml
+
+# python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.eggs/
+
+# venv
+.venv/
+venv/
+env/
+.python-version
+
+# snakemake
+.snakemake/
+*.snakemake
+*.snakemake.log
+
+# SLURM
+slurm-*.out
+slurm-*.err
+*-*.out
+*-*.err
+log/
+
+# step outputs (large; meant to be regenerated)
+pipeline/step*/runlog.txt
+pipeline/step*/*.pdf
+pipeline/step*/*.png
+pipeline/step*/*.tsv
+pipeline/step*/*.tsv.gz
+pipeline/step*/*.nwk
+pipeline/step*/simulations/
+pipeline/step*/cache/
+pipeline/step*/odp_pairwise_decay/
+pipeline/step*/alg_dispersion_plots/
+pipeline/step*/branch_stats_output/
+pipeline/step*/changestring_checkpoints/
+
+# OS
+.DS_Store
+._*

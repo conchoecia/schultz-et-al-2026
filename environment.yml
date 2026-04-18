@@ -1,0 +1,24 @@
+name: egt-repro
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pip
+  - pip:
+    - egt>=0.1.0,<0.2
+
+# The pipeline depends on:
+#   - `egt` itself (pulls in numpy, pandas, scipy, scikit-learn, matplotlib,
+#     networkx, Pillow, umap-learn[plot], bokeh, ete4, snakemake, pyyaml via
+#     its own pyproject.toml)
+#   - nothing else
+#
+# We don't pin egt below 0.1 on purpose — 0.1.x is the initial release line.
+# Bump the upper bound when egt's API stabilizes at 1.0.
+#
+# Reproducibility note: the publication-time run on LiSC used
+#   python=3.12.13, egt=0.1.0, snakemake=8.30.0, numpy=2.4.4, pandas=3.0.2,
+#   scipy=1.17.1, scikit-learn=1.8.0, matplotlib=3.10.8, ete4=4.4.0,
+#   umap-learn=0.5.12, bokeh=3.9.0
+# Use `bin/freeze_env.sh` after creating the env to capture the exact
+# resolved versions on your machine for later audit.

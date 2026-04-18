@@ -1,0 +1,59 @@
+# This config file is used for what is currently called
+#  GenDB_build_db and GenDB_scrape_genomes_NCBI
+#  chrombase_scrape_genomes_NCBI.snakefile
+#   and
+#  chrombase_build_db_annotated_chr.snakefile
+#   and
+#  chrombase_build_db_unannotated_chr.snakefile
+
+# USE INSTRUCTIONS
+
+# Step 1. Copy this file to your current directory where you
+#         want the database to be built.
+
+# Step 2. Edit the copied chrombase.config.yaml to include the taxids
+#         you want in the database.
+
+# Step 3. Run "chrombase_scrape_genomes_NCBI.snakefile" in the directory
+#         that contains your edited chrombase.config.yaml file. Number of
+#         cores you pick here doesn't matter. Just use max 10.
+
+# Step 4. (Optional) Filter the output tsv file to remove embargoed genome
+#         assemblies. Use the genbargo github repo.
+
+# Step 5. Download the annotated genomes and their annotations with
+#         "chrombase_build_db_annotated_chr.snakefile".
+
+# Step 6. Download the unannotated genomes and use the BCnS ALGs to annotate them
+#         with "chrombase_build_db_unannotated_chr.snakefile". Run this with a
+#         single core to avoid drawing too many requests of the NCBI servers.
+#         Doing so could result your API key getting deactivated.
+
+# The taxids are the IDs we want to get genomes from.
+# It's OK if they overlap or are nested for some reason. The algorithm
+#  will just remove the duplicates. The ones included below are just examples.
+# This part of the config file is used by chrombase_scrape_genomes_NCBI.snakefile
+#
+# Things you don't want anymore can be commented out. Note - this does not delete
+#  any files.
+taxids:
+  - 33208 # Metazoa
+  # - 33317 # protostomia
+  # - 6073  # cnidaria
+  # - 6040  # porifera
+  # - 2697495 # spiralia
+  # - 6447    # mollusc
+
+# This is the email address associated with your NCBI account.
+email: "your_email@example.com"
+
+# This part of the config is used by GenDB_build_db
+# The directory specified here is where the output of GenDB_scrape_genomes_NCBI
+#  will be saved, and where GenDB_build_db will look for the output.
+directory: "odp_ncbi_genome_scraper/output/"
+
+# Set this to True if you plan to download a lot of genomes.
+#  (You probably are so best just leave it set to True.)
+# This flag specifies to use your NCBI API key that
+#  you can find in your NCBI account information.
+require_API: True
