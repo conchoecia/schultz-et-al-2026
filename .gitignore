@@ -41,6 +41,9 @@ post_analyses/*/out/consensus/
 post_analyses/*/out/tbl/
 post_analyses/build_family_naming_map/uniprot/
 
+# NCBI reference tables — regeneratable via download_ncbi.sh.
+post_analyses/go_enrichment_sweep/ncbi_ref/
+
 # step outputs (large; meant to be regenerated)
 pipeline/step*/runlog.txt
 pipeline/step*/*.pdf

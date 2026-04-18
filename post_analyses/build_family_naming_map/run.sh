@@ -17,12 +17,20 @@ source activate "$EGT_CONDA_ENV"
 OUT="$SCRIPT_DIR/out"
 mkdir -p "$OUT"
 
-# Find the human per-species RBH file.
-HUMAN_RBH=$(ls "${RBH_DIR}"/BCnSSimakov2022_Homosapiens-9606-*.rbh 2>/dev/null | head -1)
+# Find the human per-species RBH file. Prefer the canonical RefSeq
+# assembly (GCF_000001405 = GRCh38.p14) because its protein IDs are
+# NP_/XP_ accessions that map to Entrez GeneIDs (via gene2accession)
+# and thus to GO annotations. GenBank assemblies (GCA_...) use pipeline-
+# specific KAI-prefixed accessions that aren't in NCBI's cross-ref
+# tables, making downstream GO enrichment impossible.
+HUMAN_RBH=$(ls "${RBH_DIR}"/BCnSSimakov2022_Homosapiens-9606-GCF000001405.*.rbh 2>/dev/null | head -1)
+[ -n "$HUMAN_RBH" ] || HUMAN_RBH=$(ls "${RBH_DIR}"/BCnSSimakov2022_Homosapiens-9606-GCF*.rbh 2>/dev/null | head -1)
+[ -n "$HUMAN_RBH" ] || HUMAN_RBH=$(ls "${RBH_DIR}"/BCnSSimakov2022_Homosapiens-9606-*.rbh 2>/dev/null | head -1)
 if [ -z "$HUMAN_RBH" ]; then
     echo "ERROR: no Homo sapiens RBH under $RBH_DIR" >&2
     exit 1
 fi
+echo "Using human RBH: $HUMAN_RBH"
 
 # Pass 1: direct RBH join. Fast. If pass2_hmm_consensus.sh has already
 # produced pass2_hmm_to_human.tsv, fold it in via --hmm-map for the final
