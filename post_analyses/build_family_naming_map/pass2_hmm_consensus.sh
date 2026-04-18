@@ -50,6 +50,12 @@ if [ ! -f "$OUT/uniprot_human.dmnd" ]; then
 fi
 
 # 2. For each family with no human_gene in pass 1, emit consensus + DIAMOND.
+# hmmfetch needs an .ssi sidecar for O(1) name lookups into a multi-profile library.
+if [ ! -f "${HMM_LIB}.ssi" ]; then
+    echo "Building hmmfetch index on $HMM_LIB ..."
+    hmmfetch --index "$HMM_LIB"
+fi
+
 mkdir -p "$OUT/consensus"
 PASS2_TSV="$OUT/pass2_hmm_to_human.tsv"
 echo -e "family_id\thuman_gene" > "$PASS2_TSV"
@@ -57,11 +63,15 @@ echo -e "family_id\thuman_gene" > "$PASS2_TSV"
 awk -F'\t' 'NR>1 && ($3=="" || $3=="NA") {print $1}' "$PASS1_TSV" | \
 while read FAMILY; do
     CONS="$OUT/consensus/${FAMILY}.fa"
-    # hmmemit -c emits a consensus sequence for the named HMM within the library
-    hmmemit -c -o "$CONS" -n "$FAMILY" "$HMM_LIB" || {
+    # Fetch the named profile from the library, then emit its consensus.
+    if ! hmmfetch "$HMM_LIB" "$FAMILY" 2>/dev/null | hmmemit -c -o "$CONS" - 2>/dev/null; then
         echo "  no HMM for $FAMILY, skipping" >&2
         continue
-    }
+    fi
+    if [ ! -s "$CONS" ]; then
+        echo "  empty consensus for $FAMILY, skipping" >&2
+        continue
+    fi
     HIT=$(diamond blastp \
             --query "$CONS" \
             --db "$OUT/uniprot_human" \
