@@ -1,37 +1,43 @@
 # schultz-et-al-2026 — pipeline configuration
 #
 # Copy this file to config.yaml and edit the values to match your
-# environment. The defaults are the exact values used in the analyses on
-# the LiSC cluster.
+# environment. The shipped defaults point at paths that bin/download_data.sh
+# creates — on a fresh clone, run that script once and most paths Just Work.
 #
 # NOTE: this file is sourced as bash-style KEY=VALUE assignments by
 # pipeline/run_all.sh and by each pipeline/step*/run.sh. Keep it
 # bash-parseable: no spaces around `=`, no multi-line values. (The `.yaml`
 # extension is a convention only.)
+#
+# Variables with `${REPO_ROOT}` / `${DATA_DIR}` in their defaults resolve
+# at source time — REPO_ROOT is set by the calling step script; DATA_DIR
+# is declared below and can be overridden.
 
 # --- Conda env with egt installed ---
 EGT_CONDA_ENV=/lisc/data/scratch/molevo/dts/conda_envs/egt
 
-# --- Reference data (LiSC defaults; override for your env) ---
+# --- Where bin/download_data.sh extracts the Dryad bundle ---
+DATA_DIR=${REPO_ROOT}/dryad_data
+
+# --- Reference data ---
+# Shipped in-repo (tiny; not in the Dryad bundle):
+ALG_RBH=${REPO_ROOT}/reference_data/BCnSSimakov2022.rbh
+CHROM_COUNTS=${REPO_ROOT}/reference_data/species_chrom_counts.tsv
+GENOME_CONFIG_YAML=${REPO_ROOT}/genome_database/genome_list.yaml
 ALG_NAME=BCnSSimakov2022
-ALG_RBH=/lisc/data/scratch/molevo/dts/odp/LG_db/BCnSSimakov2022/BCnSSimakov2022.rbh
-RBH_DIR=/lisc/data/scratch/molevo/dts/manifold/BCnSSimakov2022_current_rbh_202509/
-GENOME_CONFIG_YAML=/lisc/data/scratch/molevo/dts/manifold/decay_odp_run/config.yaml
-CHROM_COUNTS=/lisc/data/scratch/molevo/dts/manifold/decay_odp_run/species_chrom_counts.tsv
-SYNTENY_DIR=/lisc/data/scratch/molevo/dts/manifold/decay_odp_run/odp/step2-figures/synteny_nocolor/
 
-# --- User-supplied inputs for step 2 (you must provide these) ---
-# TimeTree export (Newick) — download from timetree.org for the species set
-TIME_NEWICK=pipeline/step2_divergence_times/newick_timetree.nwk
-
-# --- User-supplied inputs for step 7 (you must provide this) ---
-# Extinction-intensity TSV (e.g. from a Sepkoski-derived dataset)
-EXTINCTION_INTENSITY=pipeline/step7_tree_analysis_branchstatsvtime/extinction_intensity.tsv
+# Downloaded from Dryad via bin/download_data.sh:
+RBH_DIR=${DATA_DIR}/BCnSSimakov2022_current_rbh_202509
+TIME_NEWICK=${DATA_DIR}/newick_and_timetree_20251118/step2_download_newick_from_timetree/newick_timetree.nwk
+EXTINCTION_INTENSITY=${DATA_DIR}/newick_and_timetree_20251118/step7_tree_analysis_branchstatsvtime/extinction_intensity.tsv
 
 # --- Tree naming ---
 TREE_PREFIX=BCnS_2026
 
-# --- Step 3 tunables ---
+# --- Step 3 tunables (optional stage; skipped by run_all.sh) ---
+# SYNTENY_DIR is NOT on Dryad (58 GB of odp synteny PDFs). Only relevant
+# if you've separately regenerated odp's synteny plots.
+SYNTENY_DIR=${SYNTENY_DIR:-}
 TARGET_SPECIES=Branchiostomafloridae-7739-GCF000003815.2
 MIN_SCAF_SIZE=250000
 BIN_SIZE=50

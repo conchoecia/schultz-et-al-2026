@@ -8,33 +8,39 @@ University of Vienna); adapt paths for your environment.
 
 - **conda / mamba / micromamba**. Every modern HPC ships one; on LiSC,
   `module load Conda/Miniforge3`.
-- **`chrombase`** checked out locally if you need to rebuild the genome
-  database: `git clone https://github.com/conchoecia/chrombase`.
-- **`odp`** checked out if you need to regenerate the per-species RBH
-  files: `git clone https://github.com/conchoecia/odp`. The ALG
-  database used is `BCnSSimakov2022` under `odp/LG_db/`.
-- **TimeTree export (Newick)** — download from
-  [timetree.org](https://timetree.org) for the 4,454 species in the
-  dataset. Place at `pipeline/step2_divergence_times/newick_timetree.nwk`.
-- **Extinction intensity TSV** — a per-age extinction-rate table (e.g.
-  derived from the Sepkoski dataset). Place at
-  `pipeline/step7_tree_analysis_branchstatsvtime/extinction_intensity.tsv`.
+- **Disk**: ~10 GB for the Dryad bundle after extraction.
+- *(optional)* **`chrombase`** checked out locally if you want to rebuild
+  the genome database from scratch: `git clone https://github.com/conchoecia/chrombase`.
+- *(optional)* **`odp`** checked out if you want to regenerate the
+  per-species RBH files rather than pull them from Dryad:
+  `git clone https://github.com/conchoecia/odp`.
 
-## 1. Clone + environment + configure
+The TimeTree newick and extinction-intensity TSV that appear as
+"user-supplied" in the raw pipeline are shipped inside the Dryad
+workflow tarball — `bin/download_data.sh` places them where the step
+scripts expect.
+
+## 1. Clone + environment + data + configure
 
 ```sh
 git clone https://github.com/conchoecia/schultz-et-al-2026.git
 cd schultz-et-al-2026
 
-# Create the conda env (Python 3.12 + egt + its scientific-Python stack).
+# 1a. Create the conda env (Python 3.12 + egt + its scientific-Python stack).
 bash bin/setup_env.sh
 conda activate egt-repro
-egt --help     # sanity check
+egt --help                  # sanity check
 
-# Configure.
+# 1b. Pull the data bundle from Dryad (~1.2 GB download, ~8 GB extracted).
+bash bin/download_data.sh
+#  → dryad_data/BCnSSimakov2022_current_rbh_202509/   5,821 per-species RBH files
+#  → dryad_data/newick_and_timetree_20251118/         published analysis workflow outputs
+
+# 1c. Configure.
 cp config.template.yaml config.yaml
-# Edit config.yaml so the paths match your environment. The defaults are
-# the exact values used for the published run on LiSC.
+# Edit config.yaml only if your paths differ — the shipped defaults
+# already point at reference_data/ (in repo) and dryad_data/ (populated
+# by step 1b).
 ```
 
 (Optional archival step: after activating, `bash bin/freeze_env.sh` emits
@@ -52,8 +58,10 @@ Key fields to edit:
 - `ALG_RBH` — the BCnSSimakov2022 ALG RBH, shipped with
   `odp`'s `LG_db/`.
 - `SYNTENY_DIR` — pre-generated odp synteny plots.
-- `TIME_NEWICK` / `EXTINCTION_INTENSITY` — user-supplied inputs noted
-  above.
+- `TIME_NEWICK` / `EXTINCTION_INTENSITY` — default to paths inside the
+  extracted Dryad workflow tarball (`dryad_data/newick_and_timetree_20251118/…`).
+  Only override if you're running against a different TimeTree export or
+  a different extinction-rate table.
 
 ## 2. Build the genome database (optional)
 

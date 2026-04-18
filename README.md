@@ -24,31 +24,61 @@ repository contains no analysis code of its own. It ships:
 git clone https://github.com/conchoecia/schultz-et-al-2026.git
 cd schultz-et-al-2026
 
-# 2. create the conda env (~5 min; uses mamba/micromamba if available)
+# 2. conda env  (~5 min; uses mamba/micromamba if available)
 #    On an HPC with lmod:  module load Conda/Miniforge3
 bash bin/setup_env.sh
 conda activate egt-repro
+egt --help                       # sanity check
 
-# 3. configure
+# 3. pull data from Dryad  (~1.2 GB download, 8 GB on disk after extract)
+bash bin/download_data.sh
+
+# 4. configure (the shipped defaults already point at dryad_data/)
 cp config.template.yaml config.yaml
-#  ... edit config.yaml: paths to RBH_DIR, ALG_RBH, GENOME_CONFIG_YAML, etc. ...
+#  ... edit config.yaml only if your paths differ ...
 
-# 4. (optional) build the genome database from the 5,821-species list
-#    Skip if you already have chromosome-scale genomes indexed.
+# 5. (optional) build the genome database from the 5,821-species list
+#    Skip if you only want to reproduce downstream analyses — the RBH
+#    files pulled from Dryad already cover the compute-expensive part.
 bash genome_database/submit.sh
 
-# 5. run the nine-stage pipeline
+# 6. run the nine-stage pipeline
 bash pipeline/run_all.sh
 ```
+
+### What gets downloaded
+
+`bin/download_data.sh` fetches two tarballs from the Dryad dataset:
+
+- `BCnSSimakov2022_current_rbh_202509.tar.gz` (568 MB → 3.6 GB) — the
+  5,821-species reciprocal-best-hits database
+- `newick_and_timetree_20251118.tar.gz` (643 MB → 4.7 GB) — the full
+  published analysis workflow (trees, divergence times, per-clade stats,
+  …). Also contains the user-supplied TimeTree newick and extinction-
+  intensity TSV, so you don't have to supply those separately. Doubles as
+  a reference for diffing your rerun against the published outputs.
 
 The setup script creates a conda env called `egt-repro` with Python 3.12
 and installs `egt` from PyPI. `egt` transitively pulls in the scientific
 Python stack the pipeline needs (numpy, pandas, scipy, scikit-learn,
 matplotlib, networkx, umap-learn, bokeh, ete4, snakemake, …).
 
-After `conda activate egt-repro`, `egt --help` should list all subcommands.
 To capture exact dep versions for an archival run, `bash bin/freeze_env.sh`
 writes `environment.lock.yml` + `requirements.lock.txt`.
+
+### Running from scratch vs. diffing against the published outputs
+
+- **Run from scratch**: just `bash pipeline/run_all.sh`. Each stage
+  regenerates its own outputs under `pipeline/stepN_*/`.
+- **Diff against published**: after `run_all.sh` finishes, compare
+  `pipeline/step*/` against `dryad_data/newick_and_timetree_20251118/step*/`.
+
+### Step 3 is optional
+
+`step3_dispersal_characterization` is a leaf stage (plots only; its
+outputs feed no downstream stages) and it wants a 58 GB synteny-plot
+directory that is not in the Dryad bundle. `run_all.sh` skips it. See
+[`pipeline/README.md`](pipeline/README.md).
 
 ## Layout
 
@@ -58,7 +88,11 @@ schultz-et-al-2026/
 ├── config.template.yaml      — paths + tunables (copy → config.yaml)
 ├── bin/
 │   ├── setup_env.sh          — create/update the conda env
+│   ├── download_data.sh      — pull the Dryad bundle into dryad_data/
 │   └── freeze_env.sh         — capture exact dep versions (lockfile)
+├── reference_data/           — small reference files shipped in-repo
+│   ├── BCnSSimakov2022.rbh   — ALG RBH database (348 KB)
+│   └── species_chrom_counts.tsv
 ├── genome_database/          — genome list + vendored chrombase snakefiles
 ├── pipeline/                 — 9 ordered step directories
 │   ├── run_all.sh

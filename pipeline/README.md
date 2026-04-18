@@ -20,6 +20,20 @@ bash pipeline/run_all.sh
 Clade-subset variants for steps 7 and 9 are in the same directory as the
 primary `run.sh` — invoke them directly.
 
+### Step 3 is optional
+
+`step3_dispersal_characterization` is a **leaf** stage — its outputs are
+not consumed by steps 4–9. It also wants a `SYNTENY_DIR` (~58 GB of
+odp-generated synteny PDFs) that is *not* part of the Dryad dataset, so a
+typical reviewer environment won't have it. `run_all.sh` skips this step.
+
+Run it manually if and only if you have the synteny directory available:
+
+```sh
+SYNTENY_DIR=/path/to/odp/step2-figures/synteny_nocolor  \
+    bash pipeline/step3_dispersal_characterization/run.sh
+```
+
 | Step | Purpose                                       | egt subcommand(s)                                        |
 |------|-----------------------------------------------|----------------------------------------------------------|
 | 1    | NCBI taxid → Newick topology                  | `egt taxids-to-newick`                                   |

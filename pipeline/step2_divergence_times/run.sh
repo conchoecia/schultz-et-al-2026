@@ -17,10 +17,12 @@ source activate "$EGT_CONDA_ENV"
 cd "$SCRIPT_DIR"
 
 # Calibrate the NCBI topology against TimeTree divergence times and emit
-# per-node and per-edge TSVs consumed by steps 3, 4, 6, 7, 8 and 9.
+# per-node and per-edge TSVs consumed by steps 4, 6, 7, 8 and 9.
 #
-# TIME_NEWICK must point at a TimeTree export (Newick) matching the
-# species set in $GENOME_CONFIG_YAML. See README for how to download it.
+# TIME_NEWICK defaults to the copy shipped in the Dryad workflow tarball
+# (bin/download_data.sh places it at
+# dryad_data/newick_and_timetree_20251118/step2_download_newick_from_timetree/newick_timetree.nwk).
+# Override in config.yaml if running with a different TimeTree export.
 egt newick-to-common-ancestors \
     --topology_newick ../step1_generate_newick/ncbi_tree.nwk \
     --time_newick "${REPO_ROOT}/${TIME_NEWICK}" \

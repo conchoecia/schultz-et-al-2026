@@ -1,6 +1,9 @@
 # user config
 config.yaml
 
+# data downloaded from Dryad (see bin/download_data.sh) — never commit
+dryad_data/
+
 # python
 __pycache__/
 *.py[cod]
