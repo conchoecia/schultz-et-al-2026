@@ -5,7 +5,7 @@ dependencies:
   - python=3.12
   - pip
   - pip:
-    - egt>=0.1.0,<0.2
+    - egt>=0.2.0,<0.3
 
 # The pipeline depends on:
 #   - `egt` itself (pulls in numpy, pandas, scipy, scikit-learn, matplotlib,
