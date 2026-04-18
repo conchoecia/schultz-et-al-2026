@@ -16,6 +16,7 @@ source activate "$EGT_CONDA_ENV"
 
 OUT="$SCRIPT_DIR/out"
 mkdir -p "$OUT"
+cd "$SCRIPT_DIR"
 
 # Clade set is paper-specific; edit as needed.
 CLADES="Metazoa:33208,Porifera:6040,Cnidaria:6073,Bilateria:33213,Protostomia:33317,Deuterostomia:33511,Nematoda:6231,Arthropoda:6656,Mollusca:6447,Annelida:6340,Vertebrata:7742"

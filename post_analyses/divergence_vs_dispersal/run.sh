@@ -16,6 +16,7 @@ source activate "$EGT_CONDA_ENV"
 
 OUT="$SCRIPT_DIR/out"
 mkdir -p "$OUT"
+cd "$SCRIPT_DIR"
 
 DIV_TSV="$SCRIPT_DIR/out/divergence.tsv"
 if [ ! -s "$DIV_TSV" ]; then

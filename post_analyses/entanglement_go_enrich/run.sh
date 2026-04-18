@@ -16,6 +16,7 @@ source activate "$EGT_CONDA_ENV"
 
 OUT="$SCRIPT_DIR/out"
 mkdir -p "$OUT"
+cd "$SCRIPT_DIR"
 
 GAF="$OUT/goa_human.gaf.gz"
 if [ ! -s "$GAF" ]; then

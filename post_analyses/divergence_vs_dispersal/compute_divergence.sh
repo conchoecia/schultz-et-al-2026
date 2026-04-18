@@ -13,8 +13,14 @@ set -euo pipefail
 #
 # Output: divergence.tsv (species TAB median_bitscore)
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+# Under sbatch, BASH_SOURCE points at /var/spool/slurm/..., so we resolve
+# REPO_ROOT by walking up from SLURM_SUBMIT_DIR (or this dir for `bash run.sh`).
+SCRIPT_NAME=divergence_vs_dispersal
+REPO_ROOT="${SLURM_SUBMIT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)}"
+while [ "$REPO_ROOT" != "/" ] && [ ! -f "$REPO_ROOT/config.template.yaml" ]; do
+    REPO_ROOT="$(dirname "$REPO_ROOT")"
+done
+SCRIPT_DIR="$REPO_ROOT/post_analyses/$SCRIPT_NAME"
 source "$REPO_ROOT/config.yaml"
 
 module load Conda/Miniforge3 2>/dev/null || true
