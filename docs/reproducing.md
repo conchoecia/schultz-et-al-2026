@@ -23,7 +23,7 @@ University of Vienna); adapt paths for your environment.
 ## 1. Clone + environment + configure
 
 ```sh
-git clone <repo-url>  schultz-et-al-2026
+git clone https://github.com/conchoecia/schultz-et-al-2026.git
 cd schultz-et-al-2026
 
 # Create the conda env (Python 3.12 + egt + its scientific-Python stack).

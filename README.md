@@ -21,7 +21,7 @@ repository contains no analysis code of its own. It ships:
 
 ```sh
 # 1. clone
-git clone <TODO: repo URL>
+git clone https://github.com/conchoecia/schultz-et-al-2026.git
 cd schultz-et-al-2026
 
 # 2. create the conda env (~5 min; uses mamba/micromamba if available)
