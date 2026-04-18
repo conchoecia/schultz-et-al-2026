@@ -28,7 +28,18 @@ slurm-*.out
 slurm-*.err
 *-*.out
 *-*.err
+*_[0-9]*.out
+*_[0-9]*.err
 log/
+
+# post_analyses/ outputs — regeneratable or upstream; only the small
+# family-naming TSVs are tracked (added via `git add -f`).
+post_analyses/*/out/*.dmnd
+post_analyses/*/out/*.gz
+post_analyses/*/out/*.obo
+post_analyses/*/out/consensus/
+post_analyses/*/out/tbl/
+post_analyses/build_family_naming_map/uniprot/
 
 # step outputs (large; meant to be regenerated)
 pipeline/step*/runlog.txt
