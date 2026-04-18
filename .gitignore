@@ -39,6 +39,9 @@ post_analyses/*/out/*.gz
 post_analyses/*/out/*.obo
 post_analyses/*/out/consensus/
 post_analyses/*/out/tbl/
+post_analyses/*/out/hits/
+post_analyses/*/out/*.fa
+post_analyses/*/out/*.fasta
 post_analyses/build_family_naming_map/uniprot/
 
 # NCBI reference tables — regeneratable via download_ncbi.sh.
