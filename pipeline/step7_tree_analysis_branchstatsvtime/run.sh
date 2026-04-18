@@ -23,5 +23,5 @@ egt branch-stats-vs-time \
     -e "../step2_divergence_times/${TREE_PREFIX}.edge_information.tsv" \
     -n "../step2_divergence_times/${TREE_PREFIX}.node_information.tsv" \
     -s "../step6_perspchrom_df_to_tree/statsdf.tsv" \
-    -i "${REPO_ROOT}/${EXTINCTION_INTENSITY}" \
+    -i "$EXTINCTION_INTENSITY" \
     -t "$CORES_STEP7"

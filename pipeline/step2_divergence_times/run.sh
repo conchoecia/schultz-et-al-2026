@@ -25,7 +25,7 @@ cd "$SCRIPT_DIR"
 # Override in config.yaml if running with a different TimeTree export.
 egt newick-to-common-ancestors \
     --topology_newick ../step1_generate_newick/ncbi_tree.nwk \
-    --time_newick "${REPO_ROOT}/${TIME_NEWICK}" \
+    --time_newick "$TIME_NEWICK" \
     -c "$GENOME_CONFIG_YAML" \
     -C "$CHROM_COUNTS" \
     -p "$TREE_PREFIX"
