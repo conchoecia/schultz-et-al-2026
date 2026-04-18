@@ -28,7 +28,7 @@ CLADES="Metazoa:33208,Porifera:6040,Cnidaria:6073,Bilateria:33213,Protostomia:33
 
 egt divergence-vs-dispersal \
     --divergence-tsv    "$DIV_TSV" \
-    --divergence-column median_bitscore \
+    --divergence-column median_pident \
     --presence-fusions  "../../pipeline/step4_persp_chr/per_species_ALG_presence_fusions.tsv" \
     --clade-groupings   "$CLADES" \
     --out-dir           "$OUT"
