@@ -17,8 +17,11 @@ Or run all in order:
 bash pipeline/run_all.sh
 ```
 
-Clade-subset variants for steps 7 and 9 are in the same directory as the
-primary `run.sh` — invoke them directly.
+Steps 7 and 9 each run a main analysis plus two clade-subset variants
+(Protostomia minus Clitellata, Vertebrata minus Teleostei); step 9 also
+runs a max-time window sweep on the Vertebrata-minus-Teleostei subset.
+All of this is folded into each step's `run.sh` — no separate scripts to
+invoke.
 
 ### Step 3 is optional
 

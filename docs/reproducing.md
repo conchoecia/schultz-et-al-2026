@@ -107,13 +107,11 @@ sbatch pipeline/step4_persp_chr/run.sh
 
 ### Clade-subset variants
 
-Steps 7 and 9 each ship a main `run.sh` and two clade-subset variants
-(`run_protost_minus_clitellata.sh`,
-`run_verte_minus_teleost.sh`). Run them after the main `run.sh` in the
-same step has produced `branch_stats_output/`.
-
-Step 9 additionally ships `run_verte_time_sweep.sh` (250 Mya → 550 Mya
-max-time window sweep for the vertebrate subset).
+Steps 7 and 9 each run two clade-subset variants (Protostomia minus
+Clitellata, Vertebrata minus Teleostei) in addition to their main
+analysis. Step 9 also runs a 250–550 Mya max-time window sweep on the
+Vertebrata-minus-Teleostei subset. All of this is built into each step's
+`run.sh`; nothing extra to invoke.
 
 ## 5. Output filenames by stage
 
