@@ -30,6 +30,7 @@ import pandas as pd
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib.ticker import ScalarFormatter, NullFormatter
 
 
 # ---------------------------------------------------------------------
@@ -89,15 +90,20 @@ UNIPROT_SP_RE = re.compile(r"^sp\|([^|]+)\|([^|]+)$")
 
 
 def parse_gene2accession(path):
-    """Return {protein_accession.version: GeneID:str} for all rows with a
-    non-empty protein_accession.version in the gene2accession table.
+    """Return (prot_to_gene, gene_to_symbol).
+
+    prot_to_gene: {protein_accession.version: GeneID:str} for all rows with
+    a non-empty protein_accession.version in the gene2accession table.
+    gene_to_symbol: {GeneID:str -> Symbol:str}; skipped when Symbol is '-'.
 
     Expected columns (tab):
       0 tax_id, 1 GeneID, 2 status, 3 RNA_nucleotide_accession.version,
-      4 RNA_nucleotide_gi, 5 protein_accession.version, 6 protein_gi, ...
+      4 RNA_nucleotide_gi, 5 protein_accession.version, 6 protein_gi,
+      7..14 …, 15 Symbol
     """
     opener = gzip.open if str(path).endswith(".gz") else open
     prot_to_gene = {}
+    gene_to_symbol = {}
     with opener(path, "rt") as fh:
         for line in fh:
             if line.startswith("#"):
@@ -108,7 +114,12 @@ def parse_gene2accession(path):
             prot, gene = f[5], f[1]
             if prot and prot != "-" and gene and gene != "-":
                 prot_to_gene[prot] = gene
-    return prot_to_gene
+            # gene2accession Symbol is column 15 when present.
+            if len(f) >= 16 and gene and gene != "-":
+                sym = f[15].strip()
+                if sym and sym != "-" and gene not in gene_to_symbol:
+                    gene_to_symbol[gene] = sym
+    return prot_to_gene, gene_to_symbol
 
 
 def parse_gene2go(path):
@@ -256,7 +267,13 @@ def enrich_for_foreground(foreground, background_to_terms, term_namespace,
 # Per-clade sweep
 # ---------------------------------------------------------------------
 OCCUPANCY_MIN = 0.5  # matches Dryad's close_in_clade / stable_in_clade threshold
-N_GRID = [5, 10, 20, 50, 100, 200, 500, 1000, 2000]
+# Floor at N=10: hypergeometric has ~no power with 5-gene foreground
+# (BH-FDR correction over many terms kills any signal), so starting at
+# N=10 — where power ramps up — gives cleaner curves. The upper end and
+# spacing come from geomspace(10, n_rows, NUM_POINTS) per clade, so no
+# arbitrary 2000 ceiling and no close-packed tail for small clades.
+N_MIN = 10
+NUM_POINTS = 8
 
 
 def sweep_clade(clade_rows, fam_to_genes, background_to_terms, term_namespace):
@@ -272,7 +289,15 @@ def sweep_clade(clade_rows, fam_to_genes, background_to_terms, term_namespace):
     stability_order = df.sort_values("sd_in_out_ratio_log_sigma").index.to_numpy()
     closeness_order = df.sort_values("mean_in_out_ratio_log_sigma").index.to_numpy()
     n_rows = len(df)
-    n_grid = sorted(set([x for x in N_GRID if x <= n_rows] + [n_rows]))
+    # Per-clade geometric grid: NUM_POINTS log-spaced integers from N_MIN
+    # up to n_rows inclusive. np.unique collapses duplicates that can
+    # appear when the range is small (e.g. ceil(10)==10 and floor of the
+    # next geomspace step is also 10).
+    if n_rows < N_MIN:
+        n_grid = [n_rows]
+    else:
+        n_grid = np.unique(np.geomspace(N_MIN, n_rows, num=NUM_POINTS)
+                              .round().astype(int)).tolist()
 
     records = []
     curve_data = defaultdict(list)
@@ -335,8 +360,14 @@ def harvest_significant_terms(clade, clade_rows, records,
     record showed q25 hits under any namespace, re-run the enrichment
     and emit all q<=0.25 terms at that cell. Yields many more rows but
     the correct distribution over N.
+
+    Returns (rows_out, gene_lists_out) where gene_lists_out is a list of
+    dicts {clade, axis, N_threshold, go_id, gene_ids (',-joined)} — the
+    foreground GeneIDs that are annotated with that go_id at that cell.
+    Used downstream by treeplot / emapplot / cnetplot in enrich_plots.py.
     """
     out = []
+    gene_lists = []
     df = clade_rows.copy()
     df = df[df["occupancy_in"].fillna(0) >= OCCUPANCY_MIN]
     df = df.dropna(subset=["sd_in_out_ratio_log_sigma",
@@ -367,7 +398,11 @@ def harvest_significant_terms(clade, clade_rows, records,
             fg = set()
             for f in families:
                 fg |= fam_to_genes.get(f, set())
+            # Restrict to GeneIDs that are actually in the annotatable
+            # background (matches enrich_for_foreground's internal filter).
+            fg_in_bg = {g for g in fg if g in background_to_terms}
             ns_res = enrich_for_foreground(fg, background_to_terms, term_namespace)
+            seen_terms_this_cell = set()
             for ns, rows in ns_res.items():
                 for rr in rows:
                     if rr["q"] > 0.25:
@@ -379,7 +414,23 @@ def harvest_significant_terms(clade, clade_rows, records,
                         k=rr["k"], K=rr["K"], n=rr["n"], N=rr["N"],
                         fold=rr["fold"], p=rr["p"], q=rr["q"],
                     ))
-    return out
+                    # One gene-list row per (clade, axis, N, go_id)
+                    # regardless of which sweep_namespace produced it,
+                    # since the underlying foreground set is identical
+                    # for every ns at a given (axis, N) cell.
+                    if rr["go_id"] in seen_terms_this_cell:
+                        continue
+                    seen_terms_this_cell.add(rr["go_id"])
+                    hit_genes = sorted(
+                        g for g in fg_in_bg
+                        if rr["go_id"] in background_to_terms[g])
+                    gene_lists.append(dict(
+                        clade=clade, axis=axis, N_threshold=N,
+                        go_id=rr["go_id"],
+                        k=rr["k"],
+                        gene_ids=",".join(hit_genes),
+                    ))
+    return out, gene_lists
 
 
 # ---------------------------------------------------------------------
@@ -402,7 +453,13 @@ def main():
     (out_dir / "per_clade").mkdir(parents=True, exist_ok=True)
 
     print(f"[load] SupplementaryTable_16: {args.supp_table}")
-    df = pd.read_excel(args.supp_table, engine="openpyxl")
+    p = str(args.supp_table).lower()
+    if p.endswith(".xlsx") or p.endswith(".xls"):
+        df = pd.read_excel(args.supp_table, engine="openpyxl")
+    else:
+        # TSV / TSV.GZ emitted by `egt defining-features`.
+        df = pd.read_csv(args.supp_table, sep="\t",
+                          compression="infer", low_memory=False)
     print(f"  shape={df.shape}  clades={df['nodename'].nunique()}")
     required_cols = ("nodename", "ortholog1", "ortholog2", "occupancy_in",
                      "sd_in_out_ratio_log_sigma", "mean_in_out_ratio_log_sigma")
@@ -411,8 +468,9 @@ def main():
         sys.exit(f"ERROR: xlsx missing required columns: {missing}")
 
     print(f"[load] gene2accession: {args.gene2accession}")
-    prot_to_gene = parse_gene2accession(args.gene2accession)
-    print(f"  protein-accessions -> GeneID rows={len(prot_to_gene)}")
+    prot_to_gene, gene_to_symbol = parse_gene2accession(args.gene2accession)
+    print(f"  protein-accessions -> GeneID rows={len(prot_to_gene)}  "
+          f"gene-symbols={len(gene_to_symbol)}")
 
     print(f"[load] family map: {args.family_map}")
     fam_to_genes, stats = parse_family_map(args.family_map, prot_to_gene)
@@ -450,6 +508,7 @@ def main():
     all_records = []
     all_curves = {}
     all_significant = []
+    all_gene_lists = []
     for clade in sorted(df["nodename"].dropna().unique()):
         sub = df[df["nodename"] == clade]
         records, curves = sweep_clade(sub, fam_to_genes,
@@ -465,9 +524,11 @@ def main():
             all_records.extend(cdf.to_dict("records"))
         if curves:
             all_curves[clade] = curves
-        all_significant.extend(harvest_significant_terms(
+        sig_rows, gene_rows = harvest_significant_terms(
             clade, sub, records, fam_to_genes,
-            background_to_terms, term_namespace))
+            background_to_terms, term_namespace)
+        all_significant.extend(sig_rows)
+        all_gene_lists.extend(gene_rows)
 
     # Summary
     if all_records:
@@ -494,6 +555,30 @@ def main():
                               sep="\t", index=False)
         print("[write] significant_terms.tsv  (empty — no q<=0.25 anywhere)")
 
+    # Per-(clade, axis, N, go_id) foreground gene lists, used downstream
+    # by enrich_plots.py to build treeplot / emapplot / cnetplot views
+    # that need gene-set overlap (Jaccard) between terms.
+    if all_gene_lists:
+        gdf = pd.DataFrame(all_gene_lists).drop_duplicates(
+            subset=["clade", "axis", "N_threshold", "go_id"])
+        gdf.to_csv(out_dir / "term_gene_lists.tsv.gz",
+                   sep="\t", index=False, compression="gzip")
+        print(f"[write] term_gene_lists.tsv.gz  rows={len(gdf)}")
+    else:
+        pd.DataFrame(columns=["clade", "axis", "N_threshold", "go_id",
+                              "k", "gene_ids"]
+                     ).to_csv(out_dir / "term_gene_lists.tsv.gz",
+                              sep="\t", index=False, compression="gzip")
+        print("[write] term_gene_lists.tsv.gz  (empty)")
+
+    # GeneID -> Symbol side-car for cnetplot labels. Restricted to the
+    # background gene universe so the file stays small.
+    sym_rows = [(g, gene_to_symbol[g]) for g in sorted(background_to_terms)
+                if g in gene_to_symbol]
+    pd.DataFrame(sym_rows, columns=["gene_id", "symbol"]).to_csv(
+        out_dir / "gene_symbols.tsv", sep="\t", index=False)
+    print(f"[write] gene_symbols.tsv  rows={len(sym_rows)}")
+
     # Curves
     if all_curves:
         n_clades = len(all_curves)
@@ -515,6 +600,10 @@ def main():
                 ax.axhline(-math.log10(0.25), ls=":", color="orange", lw=0.5,
                            label="q=0.25" if row == 0 and col == 0 else None)
                 ax.set_xscale("log")
+                # Plain integer tick labels on the log axis (10, 100, 1000)
+                # instead of 10^n scientific notation.
+                ax.xaxis.set_major_formatter(ScalarFormatter())
+                ax.xaxis.set_minor_formatter(NullFormatter())
                 ax.set_title(f"{clade} — {axis}")
                 if col == 0:
                     ax.set_ylabel("-log10(top q)")

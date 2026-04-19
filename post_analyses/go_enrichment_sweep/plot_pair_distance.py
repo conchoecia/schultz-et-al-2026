@@ -53,8 +53,13 @@ def main():
     ap.add_argument("--out", required=True)
     args = ap.parse_args()
 
-    print("[load] xlsx …")
-    supp = pd.read_excel(args.supp_table, engine="openpyxl")
+    print("[load] supp table …")
+    p = str(args.supp_table).lower()
+    if p.endswith(".xlsx") or p.endswith(".xls"):
+        supp = pd.read_excel(args.supp_table, engine="openpyxl")
+    else:
+        supp = pd.read_csv(args.supp_table, sep="\t",
+                            compression="infer", low_memory=False)
     print("[load] summary.tsv …")
     summary = pd.read_csv(args.summary, sep="\t")
 

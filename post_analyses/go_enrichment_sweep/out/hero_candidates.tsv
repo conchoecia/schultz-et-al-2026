@@ -1,0 +1,85 @@
+clade	rank_in_clade	go_id	go_namespace	go_name	k	K	n_foreground	fold	q	neg_log10_q	hero_score	clade_specific_at_q01	axis	N_threshold	sweep_namespace
+Annelida	1	GO:0033186	CC	CAF-1 complex	2	3	19	80.35	0.0029214655782191	2.53	22.7	True	intersection	2290	CC
+Annelida	2	GO:0015078	MF	proton transmembrane transporter activity	2	7	19	34.44	0.0093559032075562	2.03	14.7	True	closeness	2290	MF
+Annelida	3	GO:0071339	CC	MLL1 complex	2	6	51	14.97	0.0509867111367227	1.29	7.1	True	stability	2290	CC
+Arthropoda	1	GO:0062072	MF	histone H3K9me2/3 reader activity	2	5	38	24.11	0.0093558138235369	2.03	13.2	True	closeness	2290	MF
+Arthropoda	2	GO:0008047	MF	enzyme activator activity	3	15	38	12.05	0.0093558138235369	2.03	12.6	True	closeness	2290	MF
+Arthropoda	3	GO:0045505	MF	dynein intermediate chain binding	6	8	296	5.8	0.0173647786117503	1.76	10.9	True	closeness	2290	MF
+Bilateria	1	GO:0036444	BP	calcium import into the mitochondrion	2	4	16	71.56	0.001362388937199	2.87	25.0	True	closeness	2290	BP
+Bilateria	2	GO:0019855	MF	calcium channel inhibitor activity	2	4	16	71.56	0.002724777874398	2.56	22.3	True	closeness	2290	MF
+Bilateria	3	GO:0003281	BP	ventricular septum development	2	3	30	50.89	0.0064201452968029	2.19	17.6	True	intersection	2290	BP
+Bivalvia	1	GO:0016251	MF	RNA polymerase II general transcription initiation factor activity	2	8	12	47.71	0.0076215001603639	2.12	16.7	True	intersection	2290	MF
+Bivalvia	2	GO:0000151	CC	ubiquitin ligase complex	3	31	12	18.47	0.0059196091654567	2.23	16.2	True	intersection	2290	CC
+Bivalvia	3	GO:0005669	CC	transcription factor TFIID complex	2	11	12	34.7	0.0082427494763658	2.08	15.1	True	intersection	2290	CC
+Cephalopoda	1	GO:0045190	BP	isotype switching	2	5	42	21.81	0.0206161985874348	1.69	10.6	True	stability	2290	BP
+Cephalopoda	2	GO:0006979	BP	response to oxidative stress	2	29	14	11.28	0.0128264781358449	1.89	9.4	True	intersection	2290	BP
+Cephalopoda	3	GO:0002181	BP	cytoplasmic translation	5	30	86	4.44	0.0314334107281989	1.5	7.2	True	closeness	2290	BP
+Chordata	1	GO:0060173	BP	limb development	2	9	17	29.93	0.0030194769560036	2.52	17.5	True	stability	2290	BP
+Chordata	2	GO:0034063	BP	stress granule assembly	2	7	20	32.71	0.005190132970713	2.28	16.3	True	closeness	2290	BP
+Chordata	3	GO:0006325	BP	chromatin organization	3	31	18	12.31	0.0027970195617742	2.55	16.0	True	intersection	2290	BP
+Clitellata	1	GO:0019477	BP	L-lysine catabolic process	2	4	19	60.26	0.001550399317363	2.81	23.5	True	stability	2290	BP
+Clitellata	2	GO:0032956	BP	regulation of actin cytoskeleton organization	2	13	16	22.02	0.0077835896281329	2.11	13.3	True	intersection	2290	BP
+Clitellata	3	GO:0060173	BP	limb development	2	9	44	11.57	0.12520967212606	0.9	4.5	True	stability	2290	BP
+Cnidaria	1	GO:0045765	BP	regulation of angiogenesis	2	2	43	53.26	0.0075798245262662	2.12	17.2	True	closeness	2290	BP
+Cnidaria	2	GO:0030334	BP	regulation of cell migration	2	10	15	30.53	0.0034978567957092	2.46	17.1	True	stability	2290	BP
+Cnidaria	3	GO:1904781	BP	positive regulation of protein localization to centrosome	2	2	45	50.89	0.0075546423849652	2.12	17.0	True	stability	2290	BP
+Coleoidea	1	GO:0006979	BP	response to oxidative stress	2	29	10	15.79	0.0065450143188364	2.18	12.3	True	intersection	2290	BP
+Coleoidea	2	GO:0045190	BP	isotype switching	2	5	67	13.67	0.0408292569096621	1.39	7.4	True	intersection	2290	BP
+Coleoidea	3	GO:0002181	BP	cytoplasmic translation	4	30	67	4.56	0.0471125630978157	1.33	5.8	True	intersection	2290	BP
+Ctenophora	1	GO:1990351	CC	transporter complex	2	2	14	163.57	0.0007985791167546	3.1	32.2	True	intersection	2290	CC
+Ctenophora	2	GO:0051864	MF	histone H3K36 demethylase activity	2	3	20	76.33	0.0019470733985407	2.71	24.0	True	closeness	2290	MF
+Ctenophora	3	GO:1990531	CC	phospholipid-translocating ATPase complex	2	3	20	76.33	0.0024709599319958	2.61	23.1	True	closeness	2290	CC
+Decapodiformes	1	GO:0071817	CC	MMXD complex	2	2	20	114.5	0.0012323987325	2.91	28.1	True	closeness	2290	CC
+Decapodiformes	2	GO:0007059	BP	chromosome segregation	2	14	20	16.36	0.0092913913319771	2.03	11.6	True	closeness	2290	BP
+Decapodiformes	3	GO:0006979	BP	response to oxidative stress	4	29	56	5.64	0.028317452336581	1.55	7.7	True	intersection	2290	BP
+Deuterostomia	1	GO:0005852	CC	eukaryotic translation initiation factor 3 complex	6	10	154	8.92	0.0007896125486672	3.1	24.0	True	closeness	2290	CC
+Deuterostomia	2	GO:0033290	CC	eukaryotic 48S preinitiation complex	6	10	154	8.92	0.0007896125486672	3.1	24.0	True	closeness	2290	CC
+Deuterostomia	3	GO:0001568	BP	blood vessel development	2	2	39	58.72	0.0013005431330017	2.89	24.0	True	intersection	2290	BP
+Diptera	1	GO:0033762	BP	response to glucagon	2	2	51	44.9	0.013621249148676	1.87	14.5	True	closeness	2290	BP
+Diptera	2	GO:0007059	BP	chromosome segregation	2	14	18	18.17	0.0125575172086547	1.9	11.2	True	stability	2290	BP
+Diptera	3	GO:0051864	MF	histone H3K36 demethylase activity	2	3	51	29.93	0.0417189026670599	1.38	9.6	True	closeness	2290	MF
+Echinodermata	1	GO:0003755	MF	peptidyl-prolyl cis-trans isomerase activity	2	5	11	83.27	0.0006246137339304	3.2	28.9	True	intersection	2290	MF
+Echinodermata	2	GO:0031146	BP	SCF-dependent proteasomal ubiquitin-dependent protein catabolic process	2	13	16	22.02	0.0136576348793718	1.86	11.8	True	stability	2290	BP
+Echinodermata	3	GO:0002181	BP	cytoplasmic translation	2	30	17	8.98	0.0478614933904161	1.32	5.9	True	closeness	2290	BP
+Gastropoda	1	GO:0031167	BP	rRNA methylation	2	4	14	81.79	0.0004137415930248	3.38	30.4	True	intersection	2290	BP
+Gastropoda	2	GO:0006851	BP	mitochondrial calcium ion transmembrane transport	4	4	133	17.22	0.0011881280753394	2.93	24.0	True	closeness	2290	BP
+Gastropoda	3	GO:0006814	BP	sodium ion transport	2	5	20	45.8	0.002140792492194	2.67	20.8	True	closeness	2290	BP
+Hexapoda	1	GO:0072711	BP	cellular response to hydroxyurea	2	3	29	52.64	0.0053022925554102	2.28	18.4	True	intersection	2290	BP
+Hexapoda	2	GO:0005802	CC	trans-Golgi network	3	44	18	8.67	0.0140531501714425	1.85	10.0	True	closeness	2290	all
+Hexapoda	3	GO:0008289	MF	lipid binding	2	18	18	14.14	0.0149209983889288	1.83	9.9	True	closeness	2290	MF
+Insecta	1	GO:0042147	BP	retrograde transport, endosome to Golgi	2	24	14	13.63	0.0088730792085155	2.05	10.9	True	intersection	2290	BP
+Insecta	2	GO:0003777	MF	microtubule motor activity	9	11	519	3.61	0.0147987933800653	1.83	10.2	True	stability	2290	MF
+Insecta	3	GO:0005802	CC	trans-Golgi network	3	44	18	8.67	0.0140531501714425	1.85	10.0	True	closeness	2290	all
+Mammalia	1	GO:0006515	BP	protein quality control for misfolded or incompletely synthesized proteins	2	4	20	57.25	0.0004304144144935	3.37	27.8	True	closeness	2290	BP
+Mammalia	2	GO:0004553	MF	hydrolase activity, hydrolyzing O-glycosyl compounds	2	5	19	48.21	0.0051424138133781	2.29	18.1	True	stability	2290	MF
+Mammalia	3	GO:0055088	BP	lipid homeostasis	2	7	21	31.16	0.0040914883731833	2.39	16.8	True	intersection	2290	BP
+Mollusca	1	GO:0071339	CC	MLL1 complex	2	6	13	58.72	0.0066107334974185	2.18	18.1	True	intersection	2290	CC
+Mollusca	2	GO:0045893	BP	positive regulation of DNA-templated transcription	6	117	19	6.18	0.0031944880432918	2.5	16.1	True	closeness	2290	BP
+Mollusca	3	GO:0034446	BP	substrate adhesion-dependent cell spreading	2	8	19	30.13	0.0075152889010751	2.12	14.8	True	closeness	2290	BP
+Nematoda	1	GO:0000166	MF	nucleotide binding	8	31	48	12.31	4.586637665545042e-06	5.34	54.7	True	stability	2290	MF
+Nematoda	2	GO:0008569	MF	minus-end-directed microtubule motor activity	3	4	19	90.39	4.243611726476649e-05	4.37	49.2	True	closeness	2290	MF
+Nematoda	3	GO:0030286	CC	dynein complex	3	5	19	72.32	0.0001151276002133	3.94	42.1	True	closeness	2290	CC
+Neoptera	1	GO:0045780	BP	positive regulation of bone resorption	2	2	37	61.89	0.0035575497776497	2.45	20.6	True	stability	2290	BP
+Neoptera	2	GO:0090090	BP	negative regulation of canonical Wnt signaling pathway	2	18	15	16.96	0.0086532648103427	2.06	11.9	True	intersection	2290	BP
+Neoptera	3	GO:0042147	BP	retrograde transport, endosome to Golgi	2	24	15	12.72	0.01017292573441	1.99	10.3	True	intersection	2290	BP
+Platyhelminthes	1	GO:0042981	BP	regulation of apoptotic process	4	29	12	26.32	9.588815693451074e-06	5.02	47.4	True	intersection	2290	BP
+Platyhelminthes	2	GO:1905806	BP	regulation of synapse pruning	2	2	19	120.53	0.0001059066961683	3.98	38.9	True	closeness	2290	BP
+Platyhelminthes	3	GO:0070585	BP	protein localization to mitochondrion	2	9	19	26.78	0.0090745443558512	2.04	13.7	True	stability	2290	BP
+Porifera	1	GO:0070778	BP	L-aspartate transmembrane transport	2	2	19	120.53	0.00022183177185	3.65	35.7	True	closeness	2290	BP
+Porifera	2	GO:0015810	BP	aspartate transmembrane transport	2	2	19	120.53	0.00022183177185	3.65	35.7	True	closeness	2290	BP
+Porifera	3	GO:0015813	BP	L-glutamate transmembrane transport	2	2	19	120.53	0.00022183177185	3.65	35.7	True	closeness	2290	BP
+Protostomia	1	GO:2000138	BP	positive regulation of cell proliferation involved in heart morphogenesis	2	2	37	61.89	0.0018423025634257	2.73	23.0	True	closeness	2290	BP
+Protostomia	2	GO:0060716	BP	labyrinthine layer blood vessel development	2	2	37	61.89	0.0018423025634257	2.73	23.0	True	closeness	2290	BP
+Protostomia	3	GO:0036302	BP	atrioventricular canal development	2	3	37	41.26	0.0031260248791027	2.51	19.0	True	closeness	2290	BP
+Scaphopoda	1	GO:0001535	CC	radial spoke head	2	2	54	42.41	0.0090089110440855	2.05	15.6	True	closeness	2290	CC
+Scaphopoda	2	GO:0160112	CC	axonemal B tubule inner sheath	5	9	138	9.22	0.0068973564507386	2.16	15.5	True	closeness	2290	CC
+Scaphopoda	3	GO:0006914	BP	autophagy	3	15	27	16.96	0.0084789358223539	2.07	14.7	True	intersection	2290	BP
+Spiralia	1	GO:0065003	BP	protein-containing complex assembly	2	28	7	23.37	0.0087475973762065	2.06	13.2	True	intersection	2290	BP
+Spiralia	2	GO:0000151	CC	ubiquitin ligase complex	2	31	7	21.11	0.0152150952745296	1.82	11.3	True	intersection	2290	CC
+Spiralia	3	GO:2000481	BP	positive regulation of cAMP-dependent protein kinase activity	2	2	208	11.01	0.1108884144980721	0.96	4.7	True	stability	2290	BP
+Teleostei	1	GO:0008757	MF	S-adenosylmethionine-dependent methyltransferase activity	3	5	20	68.7	7.290854912614515e-05	4.14	43.7	True	stability	2290	MF
+Teleostei	2	GO:0008173	MF	RNA methyltransferase activity	3	6	20	57.25	7.290854912614515e-05	4.14	41.8	True	stability	2290	MF
+Teleostei	3	GO:0008168	MF	methyltransferase activity	3	9	41	18.62	0.0029087940199487	2.54	18.5	True	stability	2290	MF
+Vertebrata	1	GO:0008344	BP	adult locomotory behavior	2	6	18	42.41	0.0019867335462502	2.7	20.7	True	stability	2290	BP
+Vertebrata	2	GO:0010977	BP	negative regulation of neuron projection development	2	8	18	31.81	0.0019867335462502	2.7	19.1	True	stability	2290	BP
+Vertebrata	3	GO:0032456	BP	endocytic recycling	8	22	144	5.78	0.005221009105814	2.28	16.3	True	stability	2290	BP

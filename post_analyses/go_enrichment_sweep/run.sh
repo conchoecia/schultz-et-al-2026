@@ -24,10 +24,18 @@ cd "$SCRIPT_DIR"
 OUT="$SCRIPT_DIR/out"
 mkdir -p "$OUT"
 
-# Dryad SupplementaryTable_16 ships inside the workflow bundle; on LiSC
-# it's pre-staged at the author's submission directory. Override via env.
+# Source table: prefer the freshly-rebuilt unique_pairs.tsv.gz from
+# post_analyses/defining_features_pairs (run against the 5,821-species
+# 202509 dataset with the 28-clade list) when present; fall back to the
+# Dryad SupplementaryTable_16.xlsx otherwise.
+REBUILT="$REPO_ROOT/post_analyses/defining_features_pairs/out/unique_pairs.tsv.gz"
 DRYAD_ROOT="${DRYAD_ROOT:-/lisc/data/scratch/molevo/dts/manifold/submission_dryad/dryad_repo}"
-SUPP_TABLE="${SUPP_TABLE:-$DRYAD_ROOT/SupplementaryTable_16.xlsx}"
+if [ -s "$REBUILT" ]; then
+    DEFAULT_SUPP="$REBUILT"
+else
+    DEFAULT_SUPP="$DRYAD_ROOT/SupplementaryTable_16.xlsx"
+fi
+SUPP_TABLE="${SUPP_TABLE:-$DEFAULT_SUPP}"
 FAMILY_MAP="${FAMILY_MAP:-$REPO_ROOT/post_analyses/build_family_naming_map/out/bcns_family_to_human_gene.tsv}"
 GENE2ACCESSION="${GENE2ACCESSION:-$SCRIPT_DIR/ncbi_ref/human_gene2accession.tsv.gz}"
 GENE2GO="${GENE2GO:-$SCRIPT_DIR/ncbi_ref/human_gene2go.tsv.gz}"
@@ -44,3 +52,29 @@ python "$SCRIPT_DIR/sweep.py" \
     --gene2accession "$GENE2ACCESSION" \
     --gene2go        "$GENE2GO" \
     --out-dir        "$OUT"
+
+# Downstream plot scripts — run after sweep.py so they consume its
+# outputs. sweep.py emits only curves.pdf + summary.tsv + significant_terms.tsv;
+# the volcano / dotplot / heatmap / pair-distance PDFs come from these.
+OBO="${OBO:-$REPO_ROOT/post_analyses/entanglement_go_enrich/out/go-basic.obo}"
+
+python "$SCRIPT_DIR/plot_volcano.py" \
+    --significant-terms "$OUT/significant_terms.tsv" \
+    --out "$OUT/volcanos.pdf"
+
+python "$SCRIPT_DIR/plot_volcano.py" \
+    --significant-terms "$OUT/significant_terms.tsv" \
+    --out "$OUT/volcanos_fold3plus.pdf" \
+    --min-fold 3
+
+python "$SCRIPT_DIR/enrich_plots.py" \
+    --significant-terms "$OUT/significant_terms.tsv" \
+    --obo               "$OBO" \
+    --out-dir           "$OUT" \
+    --term-gene-lists   "$OUT/term_gene_lists.tsv.gz" \
+    --gene-symbols      "$OUT/gene_symbols.tsv"
+
+python "$SCRIPT_DIR/plot_pair_distance.py" \
+    --supp-table "$SUPP_TABLE" \
+    --summary    "$OUT/summary.tsv" \
+    --out        "$OUT/pair_distance.pdf"
