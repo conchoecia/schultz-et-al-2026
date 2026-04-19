@@ -64,3 +64,4 @@ pipeline/step*/changestring_checkpoints/
 # OS
 .DS_Store
 ._*
+post_analyses/go_enrichment_sweep/out/hero_candidates.*
