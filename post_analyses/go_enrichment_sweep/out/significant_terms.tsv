@@ -1,4 +1,4 @@
-clade	axis	N_threshold	sweep_namespace	go_id	go_name	go_namespace	k	n	K	N	ratio_in_study	ratio_in_pop	fold	p	correction_method	q	gene_ids	gene_symbols
+clade	axis	N_threshold	sweep_namespace	go_id	go_name	go_namespace	foreground_hits_[k]	foreground_size_[n]	background_hits_[K]	background_size_[N]	ratio_in_study_[k/n]	ratio_in_pop_[K/N]	fold_enrichment	p_value	correction_method	q_value	gene_ids	gene_symbols
 Annelida	stability	10	CC	GO:0033186	CAF-1 complex	CC	2	19	3	2290	2/19	3/2290	80.35087719298245	0.00019476437188127948	fdr_bh	0.0029214655782191924	10036;5928	CHAF1A;RBBP4
 Annelida	closeness	10	CC	GO:0033186	CAF-1 complex	CC	2	19	3	2290	2/19	3/2290	80.35087719298245	0.00019476437188127948	fdr_bh	0.0029214655782191924	10036;5928	CHAF1A;RBBP4
 Annelida	intersection	10	CC	GO:0033186	CAF-1 complex	CC	2	19	3	2290	2/19	3/2290	80.35087719298245	0.00019476437188127948	fdr_bh	0.0029214655782191924	10036;5928	CHAF1A;RBBP4
