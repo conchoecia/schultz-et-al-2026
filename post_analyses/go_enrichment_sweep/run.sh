@@ -46,35 +46,40 @@ if [ ! -s "$GENE2ACCESSION" ] || [ ! -s "$GENE2GO" ]; then
     bash "$SCRIPT_DIR/download_ncbi.sh"
 fi
 
-python "$SCRIPT_DIR/sweep.py" \
+# All GO-sweep machinery now lives under `egt go <sub>`. The pre-refactor
+# Python scripts in this directory (sweep.py, enrich_plots.py,
+# plot_volcano.py, plot_pair_distance.py, plot_pair_coenrich.py,
+# pair_coenrichment.py, benchmark_*.py) are retained for historical
+# reproducibility but are no longer invoked by run.sh. The `go-sweep-v1`
+# git tag in the egt repository pins their pre-refactor state.
+
+egt go sweep \
     --supp-table     "$SUPP_TABLE" \
     --family-map     "$FAMILY_MAP" \
     --gene2accession "$GENE2ACCESSION" \
     --gene2go        "$GENE2GO" \
     --out-dir        "$OUT"
 
-# Downstream plot scripts — run after sweep.py so they consume its
-# outputs. sweep.py emits only curves.pdf + summary.tsv + significant_terms.tsv;
-# the volcano / dotplot / heatmap / pair-distance PDFs come from these.
+# Downstream plot subcommands consume sweep outputs.
 OBO="${OBO:-$REPO_ROOT/post_analyses/entanglement_go_enrich/out/go-basic.obo}"
 
-python "$SCRIPT_DIR/plot_volcano.py" \
+egt go plot-volcano \
     --significant-terms "$OUT/significant_terms.tsv" \
     --out "$OUT/volcanos.pdf"
 
-python "$SCRIPT_DIR/plot_volcano.py" \
+egt go plot-volcano \
     --significant-terms "$OUT/significant_terms.tsv" \
     --out "$OUT/volcanos_fold3plus.pdf" \
     --min-fold 3
 
-python "$SCRIPT_DIR/enrich_plots.py" \
+egt go plot \
     --significant-terms "$OUT/significant_terms.tsv" \
     --obo               "$OBO" \
     --out-dir           "$OUT" \
     --term-gene-lists   "$OUT/term_gene_lists.tsv.gz" \
     --gene-symbols      "$OUT/gene_symbols.tsv"
 
-python "$SCRIPT_DIR/plot_pair_distance.py" \
+egt go plot-pair-distance \
     --supp-table "$SUPP_TABLE" \
     --summary    "$OUT/summary.tsv" \
     --out        "$OUT/pair_distance.pdf"
