@@ -65,3 +65,6 @@ pipeline/step*/changestring_checkpoints/
 .DS_Store
 ._*
 post_analyses/go_enrichment_sweep/out/hero_candidates.*
+
+# Local-only manuscript drafts for GO-enrichment section (never commit)
+post_analyses/go_enrichment_sweep/GO_enrichment_section_draft*.md
