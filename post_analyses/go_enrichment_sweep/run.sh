@@ -53,15 +53,17 @@ fi
 # reproducibility but are no longer invoked by run.sh. The `go-sweep-v1`
 # git tag in the egt repository pins their pre-refactor state.
 
+OBO="${OBO:-$REPO_ROOT/post_analyses/entanglement_go_enrich/out/go-basic.obo}"
+
 egt go sweep \
     --supp-table     "$SUPP_TABLE" \
     --family-map     "$FAMILY_MAP" \
     --gene2accession "$GENE2ACCESSION" \
     --gene2go        "$GENE2GO" \
+    --obo            "$OBO" \
     --out-dir        "$OUT"
 
 # Downstream plot subcommands consume sweep outputs.
-OBO="${OBO:-$REPO_ROOT/post_analyses/entanglement_go_enrich/out/go-basic.obo}"
 
 egt go plot-volcano \
     --significant-terms "$OUT/significant_terms.tsv" \
