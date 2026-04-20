@@ -68,3 +68,7 @@ post_analyses/go_enrichment_sweep/out/hero_candidates.*
 
 # Local-only manuscript drafts for GO-enrichment section (never commit)
 post_analyses/go_enrichment_sweep/GO_enrichment_section_draft*.md
+
+# .STALE / sparse_test obsolete cuts (regeneratable; never commit)
+**/.STALE/
+post_analyses/defining_features_pairs/sparse_test/
