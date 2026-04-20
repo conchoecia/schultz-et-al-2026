@@ -1,0 +1,3 @@
+clade	axis	N_threshold	go_id	go_name	go_namespace	pair_cohits_[k]	pair_count_[n]	fam_hits_[K]	fam_count_[N]	fold_enrichment	q_value	pair_either_hits	p_fam	p_co_null	expected_k_co	p_value	correction_method
+Annelida	stability	10	GO:0005515	protein binding	MF	9	9	1972	2304	1.365058074709215	0.12152617841576735	9	0.8559027777777778	0.7325695650077161	6.593126085069445	0.060763089207883675	fdr_bh
+Annelida	stability	10	GO:0005829	cytosol	CC	2	9	918	2304	1.3998034943825024	0.43059650472109606	7	0.3984375	0.15875244140625	1.42877197265625	0.43059650472109606	fdr_bh

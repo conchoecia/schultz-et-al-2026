@@ -1,0 +1,3 @@
+clade	axis	N_threshold	go_id	go_name	go_namespace	pair_cohits_[k]	pair_count_[n]	fam_hits_[K]	fam_count_[N]	fold_enrichment	q_value	pair_either_hits	p_fam	p_co_null	expected_k_co	p_value	correction_method
+Spiralia	intersection	27	GO:0005634	nucleus	CC	2	3	970	2304	3.761232862153258	0.1662248059831716	3	0.4210069444444444	0.1772468472704475	0.5317405418113426	0.0831124029915858	fdr_bh
+Spiralia	intersection	27	GO:0005515	protein binding	MF	3	3	1972	2304	1.365058074709215	0.39313944037869114	3	0.8559027777777778	0.7325695650077161	2.1977086950231484	0.39313944037869114	fdr_bh
