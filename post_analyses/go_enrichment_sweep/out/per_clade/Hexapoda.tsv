@@ -1,4 +1,4 @@
-clade	axis	N_threshold	pairs_used	namespace	foreground_size	n_families	n_terms_tested	n_hits_q05	n_hits_q25	top_term	top_term_fold	top_term_k	top_term_K	top_q
+clade	axis	N_threshold	pairs_used	namespace	foreground_size_[n]	n_families	n_terms_tested	n_hits_q05	n_hits_q25	top_term	top_term_fold_enrichment	top_term_hits_[k]	top_term_bg_hits_[K]	top_q_value
 Hexapoda	stability	10	10	all	17	17	22	0	4	GO:0009653	12.829131652661065	2	21	0.14309999981826516
 Hexapoda	stability	10	10	BP	17	17	3	2	2	GO:0009653	12.829131652661065	2	21	0.01951363633885434
 Hexapoda	stability	10	10	MF	17	17	6	0	0	GO:0003677	2.5100474972597735	3	161	0.5364943092128526

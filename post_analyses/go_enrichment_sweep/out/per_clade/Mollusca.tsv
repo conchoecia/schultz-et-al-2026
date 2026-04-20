@@ -1,4 +1,4 @@
-clade	axis	N_threshold	pairs_used	namespace	foreground_size	n_families	n_terms_tested	n_hits_q05	n_hits_q25	top_term	top_term_fold	top_term_k	top_term_K	top_q
+clade	axis	N_threshold	pairs_used	namespace	foreground_size_[n]	n_families	n_terms_tested	n_hits_q05	n_hits_q25	top_term	top_term_fold_enrichment	top_term_hits_[k]	top_term_bg_hits_[K]	top_q_value
 Mollusca	stability	10	10	all	20	20	38	5	26	GO:0044458	34.43609022556391	2	7	0.02539459442050995
 Mollusca	stability	10	10	BP	20	20	12	7	12	GO:0044458	34.43609022556391	2	7	0.016038691212953652
 Mollusca	stability	10	10	MF	20	20	6	0	3	GO:0003697	9.642105263157895	2	25	0.10480521510637257

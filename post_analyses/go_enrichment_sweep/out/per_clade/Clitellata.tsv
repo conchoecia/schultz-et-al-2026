@@ -1,4 +1,4 @@
-clade	axis	N_threshold	pairs_used	namespace	foreground_size	n_families	n_terms_tested	n_hits_q05	n_hits_q25	top_term	top_term_fold	top_term_k	top_term_K	top_q
+clade	axis	N_threshold	pairs_used	namespace	foreground_size_[n]	n_families	n_terms_tested	n_hits_q05	n_hits_q25	top_term	top_term_fold_enrichment	top_term_hits_[k]	top_term_bg_hits_[K]	top_q_value
 Clitellata	stability	10	10	all	19	19	24	1	6	GO:0019477	60.263157894736835	2	4	0.009302395904178366
 Clitellata	stability	10	10	BP	19	19	4	3	4	GO:0019477	60.263157894736835	2	4	0.001550399317363061
 Clitellata	stability	10	10	MF	19	19	5	0	2	GO:0000287	5.35672514619883	2	45	0.19857858780561943

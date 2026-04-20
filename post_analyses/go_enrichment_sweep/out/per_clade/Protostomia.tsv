@@ -1,4 +1,4 @@
-clade	axis	N_threshold	pairs_used	namespace	foreground_size	n_families	n_terms_tested	n_hits_q05	n_hits_q25	top_term	top_term_fold	top_term_k	top_term_K	top_q
+clade	axis	N_threshold	pairs_used	namespace	foreground_size_[n]	n_families	n_terms_tested	n_hits_q05	n_hits_q25	top_term	top_term_fold_enrichment	top_term_hits_[k]	top_term_bg_hits_[K]	top_q_value
 Protostomia	stability	10	10	all	16	16	27	0	1	GO:0030425	8.101415094339622	3	53	0.14307534862839855
 Protostomia	stability	10	10	BP	16	16	3	0	3	GO:0045892	3.578125	2	80	0.15818516445521602
 Protostomia	stability	10	10	MF	16	16	8	0	3	GO:0019901	4.089285714285714	2	70	0.22373810113677373

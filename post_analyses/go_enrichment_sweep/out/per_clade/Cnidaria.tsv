@@ -1,4 +1,4 @@
-clade	axis	N_threshold	pairs_used	namespace	foreground_size	n_families	n_terms_tested	n_hits_q05	n_hits_q25	top_term	top_term_fold	top_term_k	top_term_K	top_q
+clade	axis	N_threshold	pairs_used	namespace	foreground_size_[n]	n_families	n_terms_tested	n_hits_q05	n_hits_q25	top_term	top_term_fold_enrichment	top_term_hits_[k]	top_term_bg_hits_[K]	top_q_value
 Cnidaria	stability	10	10	all	17	17	20	1	2	GO:0030334	30.533333333333335	2	10	0.03497856795709225
 Cnidaria	stability	10	10	BP	17	17	2	1	2	GO:0030334	30.533333333333335	2	10	0.0034978567957092248
 Cnidaria	stability	10	10	MF	17	17	4	0	2	GO:0005515	1.1689637570188873	15	1959	0.19082454327728318

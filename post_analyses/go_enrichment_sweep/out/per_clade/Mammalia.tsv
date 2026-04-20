@@ -1,4 +1,4 @@
-clade	axis	N_threshold	pairs_used	namespace	foreground_size	n_families	n_terms_tested	n_hits_q05	n_hits_q25	top_term	top_term_fold	top_term_k	top_term_K	top_q
+clade	axis	N_threshold	pairs_used	namespace	foreground_size_[n]	n_families	n_terms_tested	n_hits_q05	n_hits_q25	top_term	top_term_fold_enrichment	top_term_hits_[k]	top_term_bg_hits_[K]	top_q_value
 Mammalia	stability	10	10	all	19	19	41	17	28	GO:0004553	48.21052631578947	2	5	0.013699715411064578
 Mammalia	stability	10	10	BP	19	19	13	9	12	GO:0055088	34.43609022556391	2	7	0.017375248814033125
 Mammalia	stability	10	10	MF	19	19	8	1	4	GO:0004553	48.21052631578947	2	5	0.005142413813378132

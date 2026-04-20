@@ -1,4 +1,4 @@
-clade	axis	N_threshold	pairs_used	namespace	foreground_size	n_families	n_terms_tested	n_hits_q05	n_hits_q25	top_term	top_term_fold	top_term_k	top_term_K	top_q
+clade	axis	N_threshold	pairs_used	namespace	foreground_size_[n]	n_families	n_terms_tested	n_hits_q05	n_hits_q25	top_term	top_term_fold_enrichment	top_term_hits_[k]	top_term_bg_hits_[K]	top_q_value
 Gastropoda	stability	10	10	all	20	20	26	4	8	GO:0031167	57.25	2	4	0.011190774776831992
 Gastropoda	stability	10	10	BP	20	20	5	3	3	GO:0031167	57.25	2	4	0.002152072072467691
 Gastropoda	stability	10	10	MF	20	20	5	3	3	GO:0009055	15.266666666666667	2	15	0.017774729297552985

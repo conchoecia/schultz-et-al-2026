@@ -1,4 +1,4 @@
-clade	axis	N_threshold	pairs_used	namespace	foreground_size	n_families	n_terms_tested	n_hits_q05	n_hits_q25	top_term	top_term_fold	top_term_k	top_term_K	top_q
+clade	axis	N_threshold	pairs_used	namespace	foreground_size_[n]	n_families	n_terms_tested	n_hits_q05	n_hits_q25	top_term	top_term_fold_enrichment	top_term_hits_[k]	top_term_bg_hits_[K]	top_q_value
 Vertebrata	stability	10	10	all	18	18	30	4	18	GO:0006264	84.81481481481481	2	3	0.005229416631216399
 Vertebrata	stability	10	10	BP	18	18	5	5	5	GO:0006264	84.81481481481481	2	3	0.0008715694385360666
 Vertebrata	stability	10	10	MF	18	18	7	0	3	GO:0043022	11.06280193236715	2	23	0.09374641456796157

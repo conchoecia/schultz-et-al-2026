@@ -1,4 +1,4 @@
-clade	axis	N_threshold	pairs_used	namespace	foreground_size	n_families	n_terms_tested	n_hits_q05	n_hits_q25	top_term	top_term_fold	top_term_k	top_term_K	top_q
+clade	axis	N_threshold	pairs_used	namespace	foreground_size_[n]	n_families	n_terms_tested	n_hits_q05	n_hits_q25	top_term	top_term_fold_enrichment	top_term_hits_[k]	top_term_bg_hits_[K]	top_q_value
 Neoptera	stability	10	10	all	17	18	21	0	6	GO:0009653	12.829131652661065	2	21	0.09106363624798693
 Neoptera	stability	10	10	BP	17	18	4	3	3	GO:0009653	12.829131652661065	2	21	0.01734545452342608
 Neoptera	stability	10	10	MF	17	18	5	0	0	GO:0003677	2.5100474972597735	3	161	0.4470785910107105

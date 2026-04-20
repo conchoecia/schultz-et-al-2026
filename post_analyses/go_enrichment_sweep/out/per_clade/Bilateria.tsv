@@ -1,4 +1,4 @@
-clade	axis	N_threshold	pairs_used	namespace	foreground_size	n_families	n_terms_tested	n_hits_q05	n_hits_q25	top_term	top_term_fold	top_term_k	top_term_K	top_q
+clade	axis	N_threshold	pairs_used	namespace	foreground_size_[n]	n_families	n_terms_tested	n_hits_q05	n_hits_q25	top_term	top_term_fold_enrichment	top_term_hits_[k]	top_term_bg_hits_[K]	top_q_value
 Bilateria	stability	10	10	all	16	16	17	0	4	GO:0000049	16.83823529411765	2	17	0.09956914939529465
 Bilateria	stability	10	10	BP	16	16	1	1	1	GO:0065003	10.223214285714286	2	28	0.015566015628310682
 Bilateria	stability	10	10	MF	16	16	4	1	1	GO:0000049	16.83823529411765	2	17	0.023428035151834035

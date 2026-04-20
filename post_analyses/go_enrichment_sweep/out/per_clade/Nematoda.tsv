@@ -1,4 +1,4 @@
-clade	axis	N_threshold	pairs_used	namespace	foreground_size	n_families	n_terms_tested	n_hits_q05	n_hits_q25	top_term	top_term_fold	top_term_k	top_term_K	top_q
+clade	axis	N_threshold	pairs_used	namespace	foreground_size_[n]	n_families	n_terms_tested	n_hits_q05	n_hits_q25	top_term	top_term_fold_enrichment	top_term_hits_[k]	top_term_bg_hits_[K]	top_q_value
 Nematoda	stability	10	10	all	19	20	60	27	45	GO:0008330	80.35087719298245	2	3	0.002337172462575354
 Nematoda	stability	10	10	BP	19	20	16	9	14	GO:0016311	80.35087719298245	2	3	0.003100798634726122
 Nematoda	stability	10	10	MF	19	20	22	16	20	GO:0008330	80.35087719298245	2	3	0.0010712040453470372

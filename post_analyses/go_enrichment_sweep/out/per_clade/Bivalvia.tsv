@@ -1,4 +1,4 @@
-clade	axis	N_threshold	pairs_used	namespace	foreground_size	n_families	n_terms_tested	n_hits_q05	n_hits_q25	top_term	top_term_fold	top_term_k	top_term_K	top_q
+clade	axis	N_threshold	pairs_used	namespace	foreground_size_[n]	n_families	n_terms_tested	n_hits_q05	n_hits_q25	top_term	top_term_fold_enrichment	top_term_hits_[k]	top_term_bg_hits_[K]	top_q_value
 Bivalvia	stability	10	10	all	20	20	40	8	30	GO:0000151	12.311827956989246	3	31	0.020339855102132293
 Bivalvia	stability	10	10	BP	20	20	10	8	10	GO:0009615	28.2716049382716	2	9	0.020339855102132293
 Bivalvia	stability	10	10	MF	20	20	11	1	9	GO:0016251	31.805555555555554	2	8	0.017483255207002096
