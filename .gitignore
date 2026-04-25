@@ -43,6 +43,7 @@ post_analyses/*/out/hits/
 post_analyses/*/out/*.fa
 post_analyses/*/out/*.fasta
 post_analyses/build_family_naming_map/uniprot/
+post_analyses/Figure_*_plots/out/*.pdf
 
 # NCBI reference tables — regeneratable via download_ncbi.sh.
 post_analyses/go_enrichment_sweep/ncbi_ref/
