@@ -4,6 +4,10 @@ config.yaml
 # data downloaded from Dryad (see bin/download_data.sh) — never commit
 dryad_data/
 
+# user-local symlink to the staged annotated_genomes tree — never commit.
+# See genome_database/annotated_genomes_link.placeholder for setup.
+genome_database/annotated_genomes_link
+
 # python
 __pycache__/
 *.py[cod]
@@ -45,6 +49,18 @@ post_analyses/*/out/*.fasta
 post_analyses/build_family_naming_map/uniprot/
 post_analyses/Figure_*_plots/out/*.pdf
 
+# stable_pair_examples — large intermediates (epigenomics caches, full
+# candidate table) are regeneratable; only the headline figures + small
+# selection / TF enrichment TSVs are tracked.
+post_analyses/stable_pair_examples/out/candidate_pairs.tsv
+post_analyses/stable_pair_examples/out/epigenomics/
+post_analyses/stable_pair_examples/__pycache__/
+post_analyses/stable_pair_examples/_v*.png
+post_analyses/stable_pair_examples/stable_pair_v*.out
+post_analyses/stable_pair_examples/stable_pair_v*.err
+post_analyses/stable_pair_examples/stable_pair_render_only_*.out
+post_analyses/stable_pair_examples/stable_pair_render_only_*.err
+
 # NCBI reference tables — regeneratable via download_ncbi.sh.
 post_analyses/go_enrichment_sweep/ncbi_ref/
 
@@ -69,6 +85,7 @@ post_analyses/go_enrichment_sweep/out/hero_candidates.*
 
 # Local-only manuscript drafts for GO-enrichment section (never commit)
 post_analyses/go_enrichment_sweep/GO_enrichment_section_draft*.md
+*_HANDOFF.md
 
 # .STALE / sparse_test obsolete cuts (regeneratable; never commit)
 **/.STALE/

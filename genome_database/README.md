@@ -53,6 +53,26 @@ just point `GENOMES_DIR` at it (the `genome_list.yaml` paths will resolve
 against that), or skip the DB build entirely and provide your own RBH
 files to the pipeline.
 
+### LiSC default
+
+On the author's LiSC install the chrombase output already lives in place
+at:
+
+```
+/lisc/data/scratch/molevo/dts/ODP_genomes/GenDB_annotated_chr/
+  odp_ncbi_genome_db/output/source_data/annotated_genomes
+```
+
+Either `export GENOMES_DIR=...` to that path, or symlink for convenience:
+
+```sh
+ln -s /lisc/data/scratch/molevo/dts/ODP_genomes/GenDB_annotated_chr/odp_ncbi_genome_db/output/source_data/annotated_genomes \
+      genome_database/annotated_genomes_link
+export GENOMES_DIR="$(pwd)/genome_database/annotated_genomes_link"
+```
+
+The symlink is in `.gitignore`; the placeholder file `annotated_genomes_link.placeholder` documents this in a fresh clone. Never copy these files into the repo — read in place.
+
 ## Genome count
 
 5,821 assemblies from 4,454 species — see `genome_list.tsv`.
