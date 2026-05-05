@@ -3,9 +3,9 @@ This is a placeholder. To enable Stage 3 of post_analyses/stable_pair_examples
 either export GENOMES_DIR or create a sibling symlink named
 "annotated_genomes_link" pointing at your staged annotated_genomes tree.
 
-On the author's LiSC install:
+For example:
 
-  ln -s /lisc/data/scratch/molevo/dts/ODP_genomes/GenDB_annotated_chr/odp_ncbi_genome_db/output/source_data/annotated_genomes \
+  ln -s /path/to/annotated_genomes \
         annotated_genomes_link
   export GENOMES_DIR="$(pwd)/annotated_genomes_link"
 

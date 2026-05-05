@@ -1,6 +1,16 @@
 # user config
 config.yaml
 
+# local hidden files/directories (agent/editor/cache state)
+.*
+!.gitignore
+
+# local operational notes
+NOTES.md
+
+# internal analyses not included in the public reproducible archive
+post_analyses/
+
 # data downloaded from Dryad (see bin/download_data.sh) — never commit
 dryad_data/
 
@@ -46,6 +56,7 @@ post_analyses/*/out/tbl/
 post_analyses/*/out/hits/
 post_analyses/*/out/*.fa
 post_analyses/*/out/*.fasta
+post_analyses/*/out/*.preupdate
 post_analyses/build_family_naming_map/uniprot/
 post_analyses/Figure_*_plots/out/*.pdf
 
@@ -66,6 +77,8 @@ post_analyses/go_enrichment_sweep/ncbi_ref/
 
 # step outputs (large; meant to be regenerated)
 pipeline/step*/runlog.txt
+pipeline/step*/*.log
+pipeline/step*/*.txt
 pipeline/step*/*.pdf
 pipeline/step*/*.png
 pipeline/step*/*.tsv
@@ -85,8 +98,18 @@ post_analyses/go_enrichment_sweep/out/hero_candidates.*
 
 # Local-only manuscript drafts for GO-enrichment section (never commit)
 post_analyses/go_enrichment_sweep/GO_enrichment_section_draft*.md
-*_HANDOFF.md
+post_analyses/go_enrichment_sweep/METHODS_draft.md
+*_HANDOFF*.md
 
 # .STALE / sparse_test obsolete cuts (regeneratable; never commit)
 **/.STALE/
 post_analyses/defining_features_pairs/sparse_test/
+
+# reviewer/internal post-analysis outputs and third-party benchmark inputs
+post_analyses/defining_features_pairs/out/pair_distance_plots/
+post_analyses/entanglement_browse/out/
+post_analyses/entanglement_go_enrich/out/
+post_analyses/go_enrichment_sweep/benchmark_pair_refs/
+post_analyses/go_enrichment_sweep/out/benchmark_*/
+post_analyses/palette_preview/out/
+post_analyses/pigeonhole_check/out/

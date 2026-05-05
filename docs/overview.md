@@ -33,8 +33,8 @@ analyses — described in the preprint at
                    │
                    ▼
          ┌─────────────────────┐
-         │   odp (not in repo) │   produce per-species RBH files against the
-         │   reciprocal best   │   BCnSSimakov2022 ALG database
+         │  per-species RBH    │   supplied by Dryad, or rebuilt outside
+         │       files         │   this public pipeline
          └──────────┬──────────┘
                     │
                     ▼

@@ -1,2 +1,0 @@
-clade	axis	N_threshold	go_id	go_name	go_namespace	pair_cohits_[k]	pair_count_[n]	fam_hits_[K]	fam_count_[N]	fold_enrichment	q_value	pair_either_hits	p_fam	p_co_null	expected_k_co	p_value	correction_method
-Echinodermata	intersection	10	GO:0005515	protein binding	MF	2	4	1972	2304	0.6825290373546075	0.938839448900821	4	0.8559027777777778	0.7325695650077161	2.9302782600308643	0.938839448900821	fdr_bh

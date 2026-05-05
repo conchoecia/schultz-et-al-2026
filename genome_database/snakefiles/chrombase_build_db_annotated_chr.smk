@@ -3,8 +3,6 @@ Program  : GenDB_build_db_annotated.snakefile
 Language : snakemake
 Date     : 2023-10-01
 Author   : Darrin T. Schultz
-Email    : darrin.schultz@univie.ac.at
-Github   : https://github.com/conchoecia/odp
 License  : GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007. See the LICENSE file.
 
 Updates:

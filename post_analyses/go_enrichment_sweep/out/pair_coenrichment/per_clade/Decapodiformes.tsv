@@ -1,3 +1,0 @@
-clade	axis	N_threshold	go_id	go_name	go_namespace	pair_cohits_[k]	pair_count_[n]	fam_hits_[K]	fam_count_[N]	fold_enrichment	q_value	pair_either_hits	p_fam	p_co_null	expected_k_co	p_value	correction_method
-Decapodiformes	closeness	10	GO:0005515	protein binding	MF	8	10	1972	2304	1.092046459767372	0.654967661784658	9	0.8559027777777778	0.7325695650077161	7.325695650077161	0.47395924777031273	fdr_bh
-Decapodiformes	closeness	10	GO:0005737	cytoplasm	CC	2	10	1057	2304	0.9502655182506318	0.654967661784658	8	0.4587673611111111	0.21046749162085263	2.104674916208526	0.654967661784658	fdr_bh

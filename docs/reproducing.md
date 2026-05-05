@@ -11,9 +11,6 @@ University of Vienna); adapt paths for your environment.
 - **Disk**: ~10 GB for the Dryad bundle after extraction.
 - *(optional)* **`chrombase`** checked out locally if you want to rebuild
   the genome database from scratch: `git clone https://github.com/conchoecia/chrombase`.
-- *(optional)* **`odp`** checked out if you want to regenerate the
-  per-species RBH files rather than pull them from Dryad:
-  `git clone https://github.com/conchoecia/odp`.
 
 The TimeTree newick and extinction-intensity TSV that appear as
 "user-supplied" in the raw pipeline are shipped inside the Dryad
@@ -53,11 +50,12 @@ Key fields to edit:
 - `EGT_CONDA_ENV` — path to the conda env with `egt` installed.
 - `GENOME_CONFIG_YAML` — points at `genome_database/genome_list.yaml`
   (after you've substituted `${GENOMES_DIR}` there) or at a pre-built
-  odp config.
+  genome config.
 - `RBH_DIR` — where per-species `.rbh` files live.
 - `ALG_RBH` — the BCnSSimakov2022 ALG RBH, shipped with
-  `odp`'s `LG_db/`.
-- `SYNTENY_DIR` — pre-generated odp synteny plots.
+  this repository under `reference_data/`.
+- `SYNTENY_DIR` — pre-generated synteny plots for the optional Step 3
+  leaf analysis.
 - `TIME_NEWICK` / `EXTINCTION_INTENSITY` — default to paths inside the
   extracted Dryad workflow tarball (`dryad_data/newick_and_timetree_20251118/…`).
   Only override if you're running against a different TimeTree export or
@@ -78,11 +76,12 @@ bash genome_database/submit.sh
 
 5,821 assemblies is a 1–2 TB stage; plan storage accordingly.
 
-## 3. Generate per-species RBH files with odp
+## 3. Per-species RBH files
 
-(Not orchestrated from this repo — run odp against `GENOMES_DIR` using
-its own `CONFIG_odp.yaml`. See the odp README. The output directory is
-what `RBH_DIR` in `config.yaml` should point at.)
+The publication RBH files are shipped through Dryad and downloaded by
+`bin/download_data.sh`. Regenerating those files from raw genomes is
+outside this public release; if you do so separately, point `RBH_DIR` in
+`config.yaml` at the resulting directory.
 
 ## 4. Run the pipeline
 

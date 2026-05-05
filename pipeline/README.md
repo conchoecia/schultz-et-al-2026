@@ -27,13 +27,13 @@ invoke.
 
 `step3_dispersal_characterization` is a **leaf** stage — its outputs are
 not consumed by steps 4–9. It also wants a `SYNTENY_DIR` (~58 GB of
-odp-generated synteny PDFs) that is *not* part of the Dryad dataset, so a
+pre-generated synteny PDFs) that is *not* part of the Dryad dataset, so a
 typical reviewer environment won't have it. `run_all.sh` skips this step.
 
 Run it manually if and only if you have the synteny directory available:
 
 ```sh
-SYNTENY_DIR=/path/to/odp/step2-figures/synteny_nocolor  \
+SYNTENY_DIR=/path/to/synteny_nocolor  \
     bash pipeline/step3_dispersal_characterization/run.sh
 ```
 

@@ -20,7 +20,7 @@ if [ ! -f "$CHROMBASE_CONFIG" ]; then
 fi
 
 module load Conda/Miniforge3 2>/dev/null || true
-source activate "${EGT_CONDA_ENV:-/lisc/data/scratch/molevo/dts/conda_envs/egt}"
+source activate "${EGT_CONDA_ENV:-egt-repro}"
 
 # Stage 1: scrape genomes from NCBI driven by chrombase's snakefile +
 #          the species list in genome_list.yaml.

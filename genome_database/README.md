@@ -53,20 +53,13 @@ just point `GENOMES_DIR` at it (the `genome_list.yaml` paths will resolve
 against that), or skip the DB build entirely and provide your own RBH
 files to the pipeline.
 
-### LiSC default
+### Existing annotated-genome tree
 
-On the author's LiSC install the chrombase output already lives in place
-at:
-
-```
-/lisc/data/scratch/molevo/dts/ODP_genomes/GenDB_annotated_chr/
-  odp_ncbi_genome_db/output/source_data/annotated_genomes
-```
-
-Either `export GENOMES_DIR=...` to that path, or symlink for convenience:
+Either `export GENOMES_DIR=/path/to/annotated_genomes`, or symlink for
+convenience:
 
 ```sh
-ln -s /lisc/data/scratch/molevo/dts/ODP_genomes/GenDB_annotated_chr/odp_ncbi_genome_db/output/source_data/annotated_genomes \
+ln -s /path/to/annotated_genomes \
       genome_database/annotated_genomes_link
 export GENOMES_DIR="$(pwd)/genome_database/annotated_genomes_link"
 ```

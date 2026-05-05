@@ -17,7 +17,7 @@ STAGES=(
     step2_divergence_times
     # step3_dispersal_characterization — OPTIONAL leaf stage; skipped by
     # default. Outputs aren't consumed by steps 4–9. Requires a 58 GB
-    # odp synteny-plot directory (SYNTENY_DIR) not shipped via Dryad.
+    # synteny-plot directory (SYNTENY_DIR) not shipped via Dryad.
     # Run manually:  bash pipeline/step3_dispersal_characterization/run.sh
     step4_persp_chr
     step5_perspchangeplot

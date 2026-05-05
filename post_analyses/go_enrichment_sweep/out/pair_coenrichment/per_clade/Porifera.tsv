@@ -1,2 +1,0 @@
-clade	axis	N_threshold	go_id	go_name	go_namespace	pair_cohits_[k]	pair_count_[n]	fam_hits_[K]	fam_count_[N]	fold_enrichment	q_value	pair_either_hits	p_fam	p_co_null	expected_k_co	p_value	correction_method
-Porifera	intersection	10	GO:0005515	protein binding	MF	3	5	1972	2304	0.819034844825529	0.8772535214549291	5	0.8559027777777778	0.7325695650077161	3.6628478250385803	0.8772535214549291	fdr_bh

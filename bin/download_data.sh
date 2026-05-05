@@ -7,8 +7,7 @@
 # unpacks both tarballs; we defer to it so the integrity check stays
 # exactly the same one the data producer uses.
 #
-# Override any file-stream ID via env var if the Dryad URLs migrate
-# after publication. The current IDs point at the private review copy.
+# Override any file-stream ID via env var if the Dryad URLs migrate.
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -16,12 +15,15 @@ REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 DATA_DIR="${DATA_DIR:-$REPO_ROOT/dryad_data}"
 DRYAD_BASE="${DRYAD_BASE:-https://datadryad.org/downloads/file_stream}"
+DRYAD_DOI="https://doi.org/10.5061/dryad.m905qfvbv"
 
-# File-stream IDs (override via env). Current values are the private-review copy.
-RBH_ID="${RBH_ID:-4623678}"             # BCnSSimakov2022_current_rbh_202509.tar.gz    568 MB
-WORKFLOW_ID="${WORKFLOW_ID:-4623679}"   # newick_and_timetree_20251118.tar.gz          643 MB
-EXTRACT_ID="${EXTRACT_ID:-4623680}"     # extract_data.sh                                3 KB
-CHECKSUMS_ID="${CHECKSUMS_ID:-4623681}" # checksums.md5                                146 B
+# File-stream IDs from the public Dryad dataset (override via env).
+RBH_ID="${RBH_ID:-4720182}"              # BCnSSimakov2022_current_rbh_202509.tar.gz    568 MB
+WORKFLOW_ID="${WORKFLOW_ID:-4720183}"    # newick_and_timetree_20251118.tar.gz          643 MB
+EXTRACT_ID="${EXTRACT_ID:-4720184}"      # extract_data.sh                                3 KB
+CHECKSUMS_ID="${CHECKSUMS_ID:-4720185}"  # checksums.md5                                146 B
+README_ID="${README_ID:-4720223}"        # README.md                                  37.2 KB
+SUPPTABLE16_ID="${SUPPTABLE16_ID:-4720181}" # SupplementaryTable_16.xlsx              30.6 MB
 
 # Filename on disk → Dryad ID.
 declare -A FILES=(
@@ -29,12 +31,15 @@ declare -A FILES=(
     ["newick_and_timetree_20251118.tar.gz"]="$WORKFLOW_ID"
     ["extract_data.sh"]="$EXTRACT_ID"
     ["checksums.md5"]="$CHECKSUMS_ID"
+    ["README.md"]="$README_ID"
+    ["SupplementaryTable_16.xlsx"]="$SUPPTABLE16_ID"
 )
 
 mkdir -p "$DATA_DIR"
 cd "$DATA_DIR"
 
 echo "==> Destination: $DATA_DIR"
+echo "==> Dryad DOI: $DRYAD_DOI"
 echo
 
 for name in "${!FILES[@]}"; do

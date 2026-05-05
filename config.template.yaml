@@ -14,7 +14,7 @@
 # is declared below and can be overridden.
 
 # --- Conda env with egt installed ---
-EGT_CONDA_ENV=/lisc/data/scratch/molevo/dts/conda_envs/egt
+EGT_CONDA_ENV=${EGT_CONDA_ENV:-egt-repro}
 
 # --- Where bin/download_data.sh extracts the Dryad bundle ---
 DATA_DIR=${REPO_ROOT}/dryad_data
@@ -35,12 +35,21 @@ EXTINCTION_INTENSITY=${DATA_DIR}/newick_and_timetree_20251118/step7_tree_analysi
 TREE_PREFIX=BCnS_2026
 
 # --- Step 3 tunables (optional stage; skipped by run_all.sh) ---
-# SYNTENY_DIR is NOT on Dryad (58 GB of odp synteny PDFs). Only relevant
-# if you've separately regenerated odp's synteny plots.
+# SYNTENY_DIR is NOT on Dryad (58 GB of synteny PDFs). Only relevant
+# if you've separately regenerated those synteny plots.
 SYNTENY_DIR=${SYNTENY_DIR:-}
 TARGET_SPECIES=Branchiostomafloridae-7739-GCF000003815.2
 MIN_SCAF_SIZE=250000
 BIN_SIZE=50
+
+# --- Optional post-analysis inputs ---
+# GENOMES_DIR is the local annotated_genomes tree used for locus-track plots.
+# COO_ROOT is the precomputed phylotreeumap COO directory used to rebuild
+# SupplementaryTable_16/unique_pairs from scratch.
+# PAIRWISE_RBH_DIR is only needed for the homology-detection audit.
+GENOMES_DIR=${GENOMES_DIR:-}
+COO_ROOT=${COO_ROOT:-}
+PAIRWISE_RBH_DIR=${PAIRWISE_RBH_DIR:-}
 
 # --- Step 6 tunables ---
 NUM_SIMULATIONS=1000
