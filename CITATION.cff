@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "If you use these pipelines, please cite the preprint below."
+message: "If you use these pipelines, please cite the paper below."
 title: "schultz-et-al-2026 — reproduction pipeline"
 version: 0.1.0
 license: MIT
@@ -9,10 +9,13 @@ authors:
 preferred-citation:
   type: article
   title: "Topological mixing and irreversibility in animal chromosome evolution"
-  year: 2024
-  journal: "bioRxiv"
-  doi: 10.1101/2024.07.29.605683
-  url: "https://doi.org/10.1101/2024.07.29.605683"
+  year: 2026
+  journal: "Science Advances"
+  volume: 12
+  issue: 34
+  number: "eadz5561"
+  doi: 10.1126/sciadv.adz5561
+  url: "https://doi.org/10.1126/sciadv.adz5561"
   authors:
     - family-names: Schultz
       given-names: "Darrin T."

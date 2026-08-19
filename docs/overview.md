@@ -1,8 +1,8 @@
 # overview
 
 The `schultz-et-al-2026` repository is the glue that turns the published
-analyses — described in the preprint at
-[doi:10.1101/2024.07.29.605683](https://doi.org/10.1101/2024.07.29.605683)
+analyses — described in
+[doi:10.1126/sciadv.adz5561](https://doi.org/10.1126/sciadv.adz5561)
 — into an executable, reviewer-runnable pipeline.
 
 ## Who does what
