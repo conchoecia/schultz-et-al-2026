@@ -1,7 +1,7 @@
 # schultz-et-al-2026
 
 Reproduction pipeline for the analyses in
-[Schultz et al. (2024) bioRxiv](https://doi.org/10.1101/2024.07.29.605683).
+[Schultz et al. (2026) *Science Advances*](https://doi.org/10.1126/sciadv.adz5561).
 
 Everything here is driven by the
 [`egt`](https://github.com/conchoecia/egt) command-line interface — this
@@ -110,6 +110,17 @@ schultz-et-al-2026/
     ├── overview.md
     └── reproducing.md
 ```
+
+## Citing this repository
+
+If you use this pipeline in your work, please cite:
+
+> Schultz, D.T., Blümel, A., Destanović, D., Sarigol, F., & Simakov, O. (2026).
+> Topological mixing and irreversibility in animal chromosome evolution.
+> *Science Advances*, **12**(34), eadz5561.
+> [https://doi.org/10.1126/sciadv.adz5561](https://doi.org/10.1126/sciadv.adz5561)
+
+See also [`CITATION.cff`](CITATION.cff).
 
 ## License
 

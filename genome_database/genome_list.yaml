@@ -1,4 +1,4 @@
-# Cleaned genome list for the Schultz et al. (2024, bioRxiv 10.1101/2024.07.29.605683)
+# Cleaned genome list for the Schultz et al. (2026, Sci. Adv. 10.1126/sciadv.adz5561)
 # analyses. Paths are templates: substitute ${GENOMES_DIR} with the
 # directory where chrombase (or equivalent) staged the annotated genomes.
 # Total species: 5821
