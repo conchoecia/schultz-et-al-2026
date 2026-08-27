@@ -66,6 +66,67 @@ export GENOMES_DIR="$(pwd)/genome_database/annotated_genomes_link"
 
 The symlink is in `.gitignore`; the placeholder file `annotated_genomes_link.placeholder` documents this in a fresh clone. Never copy these files into the repo — read in place.
 
+## Citations for the assemblies
+
+`genome_list.tsv` identifies each assembly by accession and NCBI submitter. That
+credits institutions rather than the people who produced the data, and citation
+indices do not read supplementary tables, so none of it counts as a citation.
+Acknowledging only the largest contributors makes it worse: 27 groups
+contributed 20 or more of these assemblies and account for 62.0% of them, while
+the remaining 38.0% comes from 891 groups, 498 of which contributed exactly one
+genome.
+
+`citation_table.tsv` adds the originating publication for each assembly, one row
+per accession, built with
+[`chrombase`](https://github.com/conchoecia/chrombase)'s
+`scripts/build_citation_table.py`:
+
+```
+citation_table.tsv                    5,821 assemblies -> DOI / PMID / authors / reference string
+citation_table.bib                    the same references, deduplicated (3,476 entries)
+ncbi_missing_publication_links.tsv    assemblies whose paper exists but NCBI does not link to it
+```
+
+Coverage:
+
+| | assemblies |
+| --- | --- |
+| publication recovered | 4,823 (82.9%) |
+| — `authoritative` (submitter linked it to the BioProject, dates consistent) | 801 |
+| — `high` | 1,889 |
+| — `medium` | 1,296 |
+| — `low` (needs a human to confirm) | 852 |
+| no publication recoverable | 983 |
+
+Recovery is *better* for the groups the acknowledgements missed: **92.1%** of
+assemblies from groups contributing fewer than 20 genomes resolve to a
+publication.
+
+Each row records how the publication was found (`evidence_route`), how much to
+trust it (`confidence`), and the signals behind that (`notes`). Nothing is
+invented — an assembly with no recoverable paper keeps its submitter so it can
+still be credited at the group level. Anything below `medium` should be checked
+by a human before being used as a citation.
+
+`ncbi_missing_publication_links.tsv` is the actionable subset: **3,888
+assemblies whose originating paper is public but which NCBI does not link to**,
+because the BioProject record carries no `<Publication>` element. Only 815 of
+the 5,171 BioProjects behind this dataset (15.8%) record one at all. Submitters
+can fix this on their own BioProject records, which makes the link available to
+everyone instead of only to whoever re-derives it.
+
+To rebuild or refresh the table:
+
+```sh
+git clone https://github.com/conchoecia/chrombase
+python chrombase/scripts/build_citation_table.py \
+    --genome-list genome_database/genome_list.tsv \
+    --out genome_database/citation_table.tsv \
+    --bibtex genome_database/citation_table.bib \
+    --unlinked-report genome_database/ncbi_missing_publication_links.tsv \
+    --email you@example.org
+```
+
 ## Genome count
 
 5,821 assemblies from 4,454 species — see `genome_list.tsv`.
