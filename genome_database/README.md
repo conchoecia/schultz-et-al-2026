@@ -83,7 +83,7 @@ per accession, built with
 
 ```
 citation_table.tsv                    5,821 assemblies -> DOI / PMID / authors / reference string
-citation_table.bib                    the same references, deduplicated (3,476 entries)
+citation_table.bib                    the same references, deduplicated (3,459 entries)
 ncbi_missing_publication_links.tsv    assemblies whose paper exists but NCBI does not link to it
 ```
 
@@ -91,14 +91,14 @@ Coverage:
 
 | | assemblies |
 | --- | --- |
-| publication recovered | 4,823 (82.9%) |
-| — `authoritative` (submitter linked it to the BioProject, dates consistent) | 801 |
-| — `high` | 1,889 |
-| — `medium` | 1,296 |
-| — `low` (needs a human to confirm) | 852 |
-| no publication recoverable | 983 |
+| publication recovered | 4,800 (82.5%) |
+| — `authoritative` (submitter linked it to the BioProject, dates consistent) | 798 |
+| — `high` | 1,870 |
+| — `medium` | 1,314 |
+| — `low` (needs a human to confirm) | 833 |
+| no publication recoverable | 1,006 |
 
-Recovery is *better* for the groups the acknowledgements missed: **92.1%** of
+Recovery is *better* for the groups the acknowledgements missed: **91.8%** of
 assemblies from groups contributing fewer than 20 genomes resolve to a
 publication.
 
@@ -108,7 +108,7 @@ invented — an assembly with no recoverable paper keeps its submitter so it can
 still be credited at the group level. Anything below `medium` should be checked
 by a human before being used as a citation.
 
-`ncbi_missing_publication_links.tsv` is the actionable subset: **3,888
+`ncbi_missing_publication_links.tsv` is the actionable subset: **3,865
 assemblies whose originating paper is public but which NCBI does not link to**,
 because the BioProject record carries no `<Publication>` element. Only 815 of
 the 5,171 BioProjects behind this dataset (15.8%) record one at all. Submitters
